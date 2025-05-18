@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Форум Hexenmeister Tänzelcore</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      background-color: #0f0f0f;
+      color: #00ff00;
+      line-height: 1.5;
+      overflow-y: scroll;
+      padding-bottom: 60px;
+    }
+    .nav-container {
+      text-align: center;
+      padding: 10px;
+      background-color: #1a1a1a;
+      border-bottom: 3px solid #4a4a4a;
+      position: relative;
+    }
+    .nav-menu {
+      display: inline-block;
+      background-color: #222;
+      border: 1px solid #4a4a4a;
+    }
+    .nav-menu select {
+      background-color: #222;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .nav-menu select option {
+      background-color: #222;
+      color: #00ff00;
+    }
+    .nav-menu select:hover {
+      background-color: #333;
+    }
+    .settings-btn {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #333;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-family: 'Tahoma', sans-serif;
+      font-size: 14px;
+    }
+    .settings-btn:hover {
+      background-color: #444;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px;
+      text-align: center;
+      border-bottom: 3px solid #4a4a4a;
+    }
+    header img {
+      max-width: 350px;
+      vertical-align: middle;
+      border: 2px solid #4a4a4a;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 15px;
+      background-color: #1a1a1a;
+      border: 2px solid #4a4a4a;
+    }
+    h1 {
+      color: #00cc00;
+      text-align: center;
+      font-size: 26px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    h2 {
+      color: #00ff00;
+      font-size: 20px;
+      border-bottom: 2px solid #4a4a4a;
+      padding-bottom: 5px;
+    }
+    .music-player {
+      text-align: center;
+      margin: 20px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #111;
+      color: #00ff00;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #4a4a4a;
+    }
+    th {
+      background-color: #222;
+    }
+    td a {
+      color: #00cc00;
+      text-decoration: none;
+    }
+    td a:hover {
+      text-decoration: underline;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #333;
+      color: #00ff00;
+      text-decoration: none;
+      border: 1px solid #4a4a4a;
+      border-radius: 3px;
+    }
+    .download-btn:hover {
+      background-color: #444;
+    }
+    .song-dropdown {
+      background-color: #222;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px;
+      width: 200px;
+      margin-right: 10px;
+    }
+    .play-btn {
+      font-family: 'Tahoma', sans-serif;
+      font-size: 14px;
+      background-color: #333;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px 15px;
+      cursor: pointer;
+    }
+    .play-btn:hover {
+      background-color: #444;
+    }
+    .forum-section {
+      background-color: #1a1a1a;
+      padding: 15px;
+      margin-top: 20px;
+      border: 2px solid #4a4a4a;
+    }
+    .comment-form textarea {
+      width: 100%;
+      height: 100px;
+      background-color: #111;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 10px;
+      resize: vertical;
+    }
+    .comment-form input[type="text"] {
+      width: 100%;
+      margin-bottom: 10px;
+      background-color: #111;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px;
+    }
+    .comment-form button {
+      font-family: 'Tahoma', sans-serif;
+      font-size: 14px;
+      background-color: #333;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px 15px;
+      cursor: pointer;
+    }
+    .comment-form button:hover {
+      background-color: #444;
+    }
+    .comment-list {
+      margin-top: 20px;
+    }
+    .comment {
+      background-color: #111;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #4a4a4a;
+    }
+    .comment .username {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .comment .timestamp {
+      font-size: 12px;
+      color: #666;
+      display: block;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #1a1a1a;
+      color: #00ff00;
+      border-top: 2px solid #4a4a4a;
+      margin-top: 20px;
+    }
+    .glow {
+      text-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00, 0 0 15px #00cc00;
+    }
+    .window-frame {
+      background-color: #1a1a1a;
+      border: 2px solid #00ff00;
+      margin-bottom: 20px;
+    }
+    .window-titlebar {
+      background-color: #222;
+      padding: 5px;
+      color: #00ff00;
+      font-size: 12px;
+      border-bottom: 1px solid #4a4a4a;
+    }
+    .window-content {
+      padding: 10px;
+    }
+    .moon-guy {
+      display: block;
+      margin: 15px auto;
+      max-width: 150px;
+      border: 2px solid #4a4a4a;
+    }
+    .mini-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #1a1a1a;
+      border-top: 2px solid #4a4a4a;
+      padding: 10px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .mini-player.show {
+      display: flex;
+    }
+    .mini-player span {
+      color: #00ff00;
+      font-size: 14px;
+      margin-right: 10px;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .mini-player button {
+      background-color: #333;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px 10px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-family: 'Tahoma', sans-serif;
+      font-size: 14px;
+    }
+    .mini-player button:hover {
+      background-color: #444;
+    }
+    .mini-player input[type="range"] {
+      width: 200px;
+      margin: 0 10px;
+      accent-color: #00ff00;
+    }
+    .mini-player input[type="range"]::-webkit-slider-thumb {
+      background: #00ff00;
+    }
+    /* Language Popup Styles */
+    .language-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #1a1a1a;
+      border: 2px solid #00ff00;
+      padding: 20px;
+      z-index: 2000;
+      text-align: center;
+    }
+    .language-popup select {
+      background-color: #222;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .language-popup button {
+      background-color: #333;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px 15px;
+      cursor: pointer;
+      font-family: 'Tahoma', sans-serif;
+      font-size: 14px;
+    }
+    .language-popup button:hover {
+      background-color: #444;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+    }
+  </style>
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBh6ksJhbijU9UGTqQjJrg7Pmj51pGxD70",
+      authDomain: "hexenmeister-c729a.firebaseapp.com",
+      projectId: "hexenmeister-c729a",
+      storageBucket: "hexenmeister-c729a.firebasestorage.app",
+      messagingSenderId: "109414203696",
+      appId: "1:109414203696:web:c95bcb88f039cff6f888f5",
+      measurementId: "G-FNXVV1VEWL"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Audio Player Code
+    let currentAudio = null;
+    let currentSongName = '';
+
+    window.playSong = function(audioUrl, songName) {
+      if (!audioUrl) {
+        console.log('Step 1: Error: No audio URL provided.');
+        document.getElementById('status').textContent = 'Помилка: виберіть пісню';
+        return;
+      }
+      console.log('Step 2: Attempting to play song:', audioUrl);
+      console.log('Step 3: Song name:', songName);
+      console.log('Step 4: Full URL (relative to page):', new URL(audioUrl, window.location.origin).href);
+      if (currentAudio) {
+        console.log('Step 5: Stopping previous audio:', currentAudio.src);
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+      currentAudio = new Audio(audioUrl);
+      console.log('Step 6: Audio object created:', currentAudio);
+      console.log('Step 7: Audio source set to:', currentAudio.src);
+      currentAudio.addEventListener('canplay', () => {
+        console.log('Step 8: Audio can play');
+        document.getElementById('status').textContent = `Готово до відтворення: ${songName}`;
+      });
+      currentAudio.addEventListener('loadeddata', () => {
+        console.log('Step 9: Audio metadata loaded');
+      });
+      currentAudio.addEventListener('error', (e) => {
+        const error = e.target.error;
+        console.log('Step 10: Error loading audio:', { code: error.code, message: error.message });
+        document.getElementById('status').textContent = `Помилка: перевірте консоль для деталей`;
+      });
+      currentAudio.addEventListener('stalled', () => {
+        console.log('Step 11: Audio stalled');
+        document.getElementById('status').textContent = `Зависання: перевірте мережу або файл`;
+      });
+      currentAudio.play().then(() => {
+        console.log('Step 12: Playback started successfully for:', songName);
+        const miniPlayer = document.getElementById('mini-player');
+        miniPlayer.classList.add('show');
+        currentSongName = songName;
+        document.getElementById('current-song').textContent = currentSongName;
+        document.getElementById('status').textContent = `Грає: ${songName}`;
+        currentAudio.addEventListener('timeupdate', updateProgress);
+        currentAudio.addEventListener('ended', () => {
+          console.log('Step 13: Song ended:', audioUrl);
+          miniPlayer.classList.remove('show');
+          document.getElementById('status').textContent = '';
+        });
+      }).catch(error => {
+        console.log('Step 14: Playback failed for:', songName, 'Error:', error);
+        document.getElementById('status').textContent = `Помилка: перевірте консоль для деталей`;
+      });
+    };
+
+    window.togglePlayPause = function() {
+      if (currentAudio) {
+        if (currentAudio.paused) {
+          console.log('Resuming playback:', currentAudio.src);
+          currentAudio.play();
+          document.getElementById('play-pause-btn').textContent = 'Пауза';
+          document.getElementById('status').textContent = `Грає: ${currentSongName}`;
+        } else {
+          console.log('Pausing playback:', currentAudio.src);
+          currentAudio.pause();
+          document.getElementById('play-pause-btn').textContent = 'Грати';
+          document.getElementById('status').textContent = `На паузі: ${currentSongName}`;
+        }
+      } else {
+        console.log('No audio playing to toggle.');
+        document.getElementById('status').textContent = 'Немає аудіо для відтворення';
+      }
+    };
+
+    window.rewind = function() {
+      if (currentAudio) {
+        const newTime = Math.max(0, currentAudio.currentTime - 10);
+        console.log('Rewinding to:', newTime, 'seconds');
+        currentAudio.currentTime = newTime;
+      } else {
+        console.log('No audio to rewind.');
+        document.getElementById('status').textContent = 'Немає аудіо для перемотки назад';
+      }
+    };
+
+    window.forward = function() {
+      if (currentAudio) {
+        const newTime = Math.min(currentAudio.duration, currentAudio.currentTime + 10);
+        console.log('Fast-forwarding to:', newTime, 'seconds');
+        currentAudio.currentTime = newTime;
+      } else {
+        console.log('No audio to fast-forward.');
+        document.getElementById('status').textContent = 'Немає аудіо для перемотки вперед';
+      }
+    };
+
+    function updateProgress() {
+      const progressBar = document.getElementById('progress-bar');
+      if (currentAudio && !isNaN(currentAudio.duration)) {
+        const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+        progressBar.value = progress;
+        console.log('Progress updated:', progress.toFixed(2), '%');
+      }
+    }
+
+    window.seek = function() {
+      const progressBar = document.getElementById('progress-bar');
+      if (currentAudio && !isNaN(currentAudio.duration)) {
+        const seekTime = (progressBar.value / 100) * currentAudio.duration;
+        console.log('Seeking to:', seekTime, 'seconds');
+        currentAudio.currentTime = seekTime;
+      } else {
+        console.log('No valid audio or duration to seek.');
+        document.getElementById('status').textContent = 'Немає аудіо для переходу';
+      }
+    };
+
+    // Firestore Comment Functions
+    window.submitComment = async function() {
+      const commentText = document.querySelector('.comment-form textarea').value.trim();
+      const username = document.querySelector('.comment-form input[type="text"]').value.trim() || 'Анонім';
+      if (commentText) {
+        const timestamp = new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kyiv' });
+        await addDoc(collection(db, 'comments'), {
+          text: commentText,
+          timestamp: timestamp,
+          username: username
+        });
+        document.querySelector('.comment-form textarea').value = '';
+        document.querySelector('.comment-form input[type="text"]').value = '';
+      } else {
+        alert('Будь ласка, введіть коментар.');
+      }
+    };
+
+    function displayComments() {
+      const commentList = document.getElementById('comment-list');
+      const commentsQuery = query(collection(db, 'comments'), orderBy('timestamp', 'desc'));
+      onSnapshot(commentsQuery, (snapshot) => {
+        commentList.innerHTML = '';
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const div = document.createElement('div');
+          div.className = 'comment';
+          div.innerHTML = `<span class="username">${data.username}</span><p>${data.text}</p><span class="timestamp">${data.timestamp}</span>`;
+          commentList.appendChild(div);
+        });
+      }, (error) => {
+        console.error('Error fetching comments:', error);
+      });
+    }
+
+    // Language Popup
+    window.showLanguagePopup = function() {
+      console.log('Showing language popup');
+      const overlay = document.createElement('div');
+      overlay.className = 'overlay';
+      document.body.appendChild(overlay);
+
+      const popup = document.createElement('div');
+      popup.className = 'language-popup';
+      popup.innerHTML = `
+        <h3>Виберіть мову</h3>
+        <select id="langSelect">
+          <option value="index.html">English</option>
+          <option value="indexru.html">Русский (Russian)</option>
+          <option value="indexgerman.html">Deutsch (German)</option>
+          <option value="indexuk.html">Українська (Ukrainian)</option>
+        </select>
+        <button onclick="setLanguage()">Підтвердити</button>
+      `;
+      document.body.appendChild(popup);
+
+      // Set the current language as the default selection
+      const savedLanguage = localStorage.getItem('selectedLanguage') || 'indexuk.html';
+      document.getElementById('langSelect').value = savedLanguage;
+
+      document.getElementById('langSelect').focus();
+    };
+
+    window.setLanguage = function() {
+      try {
+        const langSelect = document.getElementById('langSelect');
+        if (!langSelect) {
+          console.error('Language select element not found');
+          alert('Помилка: Елемент вибору мови не знайдено. Перевірте консоль для деталей.');
+          return;
+        }
+        const lang = langSelect.value;
+        console.log('Selected language file:', lang);
+
+        if (!lang) {
+          console.error('No language selected');
+          alert('Будь ласка, виберіть мову.');
+          return;
+        }
+
+        // Save selected language to localStorage
+        localStorage.setItem('selectedLanguage', lang);
+        console.log('Saved language to localStorage:', lang);
+
+        // Remove popup and overlay
+        const overlay = document.querySelector('.overlay');
+        const popup = document.querySelector('.language-popup');
+        if (overlay) {
+          console.log('Removing overlay');
+          overlay.remove();
+        } else {
+          console.warn('Overlay element not found');
+        }
+        if (popup) {
+          console.log('Removing popup');
+          popup.remove();
+        } else {
+          console.warn('Popup element not found');
+        }
+
+        // Redirect to the selected language file after a short delay
+        console.log('Preparing to redirect to:', lang);
+        setTimeout(() => {
+          console.log('Redirecting now to:', lang);
+          if (window.location.pathname.split('/').pop() !== lang) {
+            window.location.href = lang;
+          } else {
+            console.log('Already on selected language page, no redirect needed');
+          }
+        }, 100); // 100ms delay to ensure DOM updates
+      } catch (error) {
+        console.error('Error in setLanguage:', error);
+        alert('Сталася помилка під час зміни мови. Перевірте консоль для деталей.');
+      }
+    };
+
+    // Initialize language popup or redirect based on localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Page loaded, checking localStorage for language');
+      const savedLanguage = localStorage.getItem('selectedLanguage');
+      const currentPage = window.location.pathname.split('/').pop() || 'indexuk.html';
+
+      // Show popup for first-time visitors (no saved language)
+      if (!savedLanguage) {
+        console.log('First visit, showing language popup');
+        window.showLanguagePopup();
+      } else if (savedLanguage !== currentPage) {
+        // Redirect to saved language if current page doesn't match
+        console.log('Redirecting to saved language:', savedLanguage);
+        window.location.href = savedLanguage;
+      } else {
+        console.log('Current page matches saved language:', currentPage);
+      }
+
+      displayComments();
+    });
+
+    // Debug settings button click
+    window.debugSettingsClick = function() {
+      console.log('Settings button clicked');
+      window.showLanguagePopup();
+    };
+  </script>
+</head>
+<body>
+  <div class="nav-container">
+    <button class="settings-btn" onclick="debugSettingsClick()">Налаштування</button>
+    <div class="nav-menu">
+      <select onchange="window.location.href=this.value">
+        <option value="">Навігація</option>
+        <option value="#home">Головна</option>
+        <option value="#discography">Дискографія</option>
+        <option value="#forum">Форум</option>
+        <option value="#downloads">Завантаження</option>
+        <option value="about.html">Про нас</option>
+      </select>
+    </div>
+  </div>
+  <header>
+    <img src="images/hx.png" alt="Логотип Hexenmeister" class="header-img">
+  </header>
+  <div class="container">
+    <img src="images/tanzel.png" alt="Tänzelcore Moon Guy" class="moon-guy">
+    <h1 id="home" class="glow">Hexenmeister Tänzelcore</h1>
+    <div class="music-player window-frame">
+      <div class="window-titlebar">Музичний плеєр</div>
+      <div class="window-content">
+        <h2>Ласкаво просимо на офіційний музичний форум Hexenmeister! Я створив цей сайт для шанувальників, щоб вони могли слухати та завантажувати його музику безкоштовно. Я співпрацюю з Hexenmeister над мерчем та поширенням його мистецтва по всьому світу. Оскільки він воліє не монетизувати свою творчість, я запропонував створити цей сайт, і він погодився. Ось він, насолоджуйтесь музикою, друзі Tänzel!</h2>
+        <div>- Теодор</div>
+      </div>
+    </div>
+    <h2 id="discography" class="glow">Дискографія</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Назва</th>
+          <th>Рік</th>
+          <th>Лейбл</th>
+          <th>Формат</th>
+          <th>Пісні</th>
+          <th>Завантажити</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pilzritual Der Hexen</td>
+          <td>2022</td>
+          <td>Narbentage Produktionen</td>
+          <td>Касета, Lathe Cut</td>
+          <td>
+            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text)">
+              <option value="">Виберіть пісню</option>
+              <option value="Pilzritual%20der%20hexen/01%20Hexenmeister%20-%20Intro.mp3">Hexenmeister - Інтро</option>
+              <option value="Pilzritual%20der%20hexen/02%20Hexenmeister%20-%20Mushroom%20Ritual%20Of%20The%20Witches.mp3">Hexenmeister - Грибний ритуал відьом</option>
+              <option value="Pilzritual%20der%20hexen/03%20Hexenmeister%20-%20Auche%20Nach%20Grossvater%20Amanita.mp3">Hexenmeister - Слідами діда Аманіти</option>
+              <option value="Pilzritual%20der%20hexen/04%20Hexenmeister%20-%20Fliegenpilz.mp3">Hexenmeister - Мухомор</option>
+              <option value="Pilzritual%20der%20hexen/05%20Hexenmeister%20-%20Daum%20Des%20Geistes.mp3">Hexenmeister - Дим духу</option>
+              <option value="Pilzritual%20der%20hexen/06%20Hexenmeister%20-%20Leben%20Besen.mp3">Hexenmeister - Жива мітла</option>
+              <option value="Pilzritual%20der%20hexen/07%20Hexenmeister%20-%20Outro.mp3">Hexenmeister - Аутро</option>
+            </select>
+            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text)">Грати</button>
+          </td>
+          <td>
+            <a href="/downloads/pilzritual-der-hexen.zip" class="download-btn">Завантажити</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Ein Geist In Einem Glaskolben</td>
+          <td>2022</td>
+          <td>Okkultes Blut</td>
+          <td>Касета (з Myrkyllinen Soppa)</td>
+          <td>
+            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text)">
+              <option value="">Виберіть пісню</option>
+              <option value="EinGeist2022/Intro.mp3">Hexenmeister - Інтро</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/02%20Hexenmeister%20-%20Kabinett%20Zerbrochenen%20Flaschen.flac">Hexenmeister - Кабінет розбитих пляшок</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/03%20Hexenmeister%20-%20Geister%20Aus%20Zerbrochenen%20Flaschen.flac">Hexenmeister - Духи з розбитих пляшок</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/04%20Hexenmeister%20-%20Hexen-Grammophon.flac">Hexenmeister - Відьомський грамофон</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/05%20Hexenmeister%20-%20Wanderung%201.flac">Hexenmeister - Мандрівка 1</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/06%20Hexenmeister%20-%20Wanderung%202.flac">Hexenmeister - Мандрівка 2</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/07%20Hexenmeister%20-%20R%C3%BCckkehr%20Ins%20Kabinett%20Hexe.flac">Hexenmeister - Повернення до кабінету відьми</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/08%20Myrkyllinen%20Soppa%20-%20Tag%20And%20Y%C3%B6.flac">Myrkyllinen Soppa - День і ніч</option>
+              <option value="EinGeist2022/09_Vallilameta.mp3">Myrkyllinen Soppa - Валліламета</option>
+              <option value="EinGeist2022/10_VirmeinenHaamutaistelu.mp3">Myrkyllinen Soppa - Примарна битва</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/11%20Myrkyllinen%20Soppa%20-%20Myrkyllinen%20Polkka.flac">Myrkyllinen Soppa - Отруйна полька</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/12%20Myrkyllinen%20Soppa%20-%20Velhon%20Hulluus.flac">Myrkyllinen Soppa - Божевілля чарівника</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/13%20Myrkyllinen%20Soppa%20-%20Hengen.flac">Myrkyllinen Soppa - Дух</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/14%20Myrkyllinen%20Soppa%20-%20Outro.flac">Myrkyllinen Soppa - Аутро</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/Side%20A%20(Original).wav">Hexenmeister - Сторона А (оригінал)</option>
+              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/Side%20B%20(Original).wav">Hexenmeister - Сторона Б (оригінал)</option>
+            </select>
+            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text)">Грати</button>
+          </td>
+          <td>
+            <a href="/downloads/ein-geist-in-einem-glaskolben.zip" class="download-btn">Завантажити</a>
+          </td>
+        </tr>
+        <tr>
+          <td>68686 Million Ghost Kamikaze Attack</td>
+          <td>2023</td>
+          <td>Okkultes Blut</td>
+          <td>Касета (з Bogan Wytch)</td>
+          <td>
+            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text)">
+              <option value="">Виберіть пісню</option>
+              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A1%20-%20Bogan%20Wytch%20-%20Return%20To%20Shroomhead%20Swamp.mp3">Bogan Wytch - Повернення до болота Шрумхед</option>
+              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A2%20-%20Bogan%20Wytch%20-%20Kremling%20Kapers.mp3">Bogan Wytch - Пригоди Кремлінга</option>
+              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A3%20-%20Bogan%20Wytch%20-%20Mystics%20In%20Bali.mp3">Bogan Wytch - Містики на Балі</option>
+              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A4%20-%20Bogan%20Wytch%20-%20Ciggy%20Butt%20Brain.mp3">Bogan Wytch - Мозок недопалка</option>
+              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A5%20-%20Bogan%20Wytch%20-%20Pazuzu%20Party%20(Dirty%20Mix).mp3">Bogan Wytch - Вечірка Пазузу (брудний мікс)</option>
+              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/B%20-%20Hexenmeister%20-%20Untitled%20+%20Hexen-Grammophon%20+%20Tanzelsession%20Um%20Mitternacht%20+%20Geist%20In%20Einer%20Socke%20+%20Plasmakolben.mp3">Hexenmeister - Без назви + Відьомський грамофон + Танцель-сесія опівночі + Дух у шкарпетці + Плазмовий колбен</option>
+            </select>
+            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text)">Грати</button>
+          </td>
+          <td>
+            <a href="/downloads/68686-million-ghost-kamikaze-attack.zip" class="download-btn">Завантажити</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Morgendliche Pilzernte</td>
+          <td>2022</td>
+          <td>Narbentage Produktionen</td>
+          <td>Дискета, EP</td>
+          <td>
+            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text)">
+              <option value="">Виберіть пісню</option>
+              <option value="Morgendliche%20Pilzernte/00%20-%20Morgendliche%20Pilzernte%20-%20Hexenmeister.mp3">Hexenmeister - Ранковий збір грибів</option>
+            </select>
+            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text)">Грати</button>
+          </td>
+          <td>
+            <a href="/downloads/morgendliche-pilzernte.zip" class="download-btn">Завантажити</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Walpurgisnacht Floppies</td>
+          <td>2022</td>
+          <td>Narbentage Produktionen</td>
+          <td>Дискета (з Satanic Warmaster)</td>
+          <td>
+            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text)">
+              <option value="" disabled>Список треків недоступний</option>
+            </select>
+            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text)" disabled>Грати</button>
+          </td>
+          <td>
+            <a href="/downloads/walpurgisnacht-floppies.zip" class="download-btn">Завантажити</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Tänzelsession Um Mitternacht (Remastered)</td>
+          <td>2023</td>
+          <td>Okkultes Blut</td>
+          <td>Цифровий ремастер</td>
+          <td>
+            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text)">
+              <option value="">Виберіть пісню</option>
+              <option value="Tanzelsession/Tanzelsession.mp3">Hexenmeister - Танцель-сесія опівночі</option>
+            </select>
+            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text)">Грати</button>
+          </td>
+          <td>
+            <a href="/downloads/tanzelsession-um-mitternacht-remastered.zip" class="download-btn">Завантажити</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="status" style="text-align: center; margin-top: 10px; color: #00ff00;"></div>
+    <div class="forum-section window-frame" id="forum">
+      <div class="window-titlebar">Обговорення спільноти</div>
+      <div class="window-content">
+        <h2>Діліться своїми думками нижче.</h2>
+        <div class="comment-form">
+          <input type="text" placeholder="Ваше ім'я користувача (необов’язково)" maxlength="20">
+          <textarea placeholder="Ваш коментар..."></textarea>
+          <button onclick="submitComment()">Надіслати</button>
+        </div>
+        <div id="comment-list" class="comment-list"></div>
+      </div>
+    </div>
+    <div id="downloads" class="window-frame">
+      <div class="window-titlebar">Завантаження</div>
+      <div class="window-content">
+        <h2>Завантажити релізи Hexenmeister</h2>
+        <p><strong>Повна дискографія</strong> (включає всі релізи нижче):</p>
+        <a href="/downloads/HexenmeisterDiscog.zip" class="download-btn">Завантажити все (595 МБ)</a>
+        <p><strong>Окремі альбоми:</strong></p>
+        <ul>
+          <li><a href="/downloads/pilzritual-der-hexen.zip" class="download-btn">Pilzritual Der Hexen (10.3 МБ)</a></li>
+          <li><a href="/downloads/ein-geist-in-einem-glaskolben.zip" class="download-btn">Ein Geist In Einem Glaskolben (495 МБ)</a></li>
+          <li><a href="/downloads/68686-million-ghost-kamikaze-attack.zip" class="download-btn">68686 Million Ghost Kamikaze Attack (76 МБ)</a></li>
+          <li><a href="/downloads/morgendliche-pilzernte.zip" class="download-btn">Morgendliche Pilzernte (10.1 МБ)</a></li>
+          <li><a href="/downloads/tanzelsession-um-mitternacht-remastered.zip" class="download-btn">Tänzelsession Um Mitternacht (Ремастер) (3.6 МБ)</a></li>
+        </ul>
+        <p><em>Примітка:</em> "Walpurgisnacht Floppies" НЕ включено до повної дискографії.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>© 2025 Форум Hexenmeister Tänzelcore. Усі права захищено.</p>
+  </footer>
+  <div id="mini-player" class="mini-player">
+    <span id="current-song"></span>
+    <button onclick="rewind()">Перемотати назад</button>
+    <button id="play-pause-btn" onclick="togglePlayPause()">Грати</button>
+    <button onclick="forward()">Перемотати вперед</button>
+    <input type="range" id="progress-bar" min="0" max="100" value="0" oninput="seek()">
+  </div>
+</body>
+</html>

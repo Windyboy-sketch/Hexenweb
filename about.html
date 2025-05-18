@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Hexenmeister Tänzelcore</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      background-color: #0f0f0f;
+      color: #00ff00;
+      line-height: 1.5;
+    }
+    .nav-container {
+      text-align: center;
+      padding: 10px;
+      background-color: #1a1a1a;
+      border-bottom: 3px solid #4a4a4a;
+    }
+    .nav-menu {
+      display: inline-block;
+      background-color: #222;
+      border: 1px solid #4a4a4a;
+    }
+    .nav-menu select {
+      background-color: #222;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .nav-menu select option {
+      background-color: #222;
+      color: #00ff00;
+    }
+    .nav-menu select:hover {
+      background-color: #333;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px;
+      text-align: center;
+      border-bottom: 3px solid #4a4a4a;
+    }
+    header img {
+      max-width: 350px;
+      vertical-align: middle;
+      border: 2px solid #4a4a4a;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 15px;
+      background-color: #1a1a1a;
+      border: 2px solid #4a4a4a;
+    }
+    h1 {
+      color: #00cc00;
+      text-align: center;
+      font-size: 26px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    h2 {
+      color: #00ff00;
+      font-size: 20px;
+      border-bottom: 2px solid #4a4a4a;
+      padding-bottom: 5px;
+    }
+    .window-frame {
+      background-color: #1a1a1a;
+      border: 2px solid #00ff00;
+      margin-bottom: 20px;
+    }
+    .window-titlebar {
+      background-color: #222;
+      padding: 5px;
+      color: #00ff00;
+      font-size: 12px;
+      border-bottom: 1px solid #4a4a4a;
+    }
+    .window-content {
+      padding: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #1a1a1a;
+      color: #00ff00;
+      border-top: 2px solid #4a4a4a;
+      margin-top: 20px;
+    }
+    .glow {
+      text-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00, 0 0 15px #00cc00;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-container">
+    <div class="nav-menu">
+      <select onchange="window.location.href=this.value">
+        <option value="">Navigate</option>
+        <option value="index.html#home">Home</option>
+        <option value="index.html#discography">Discography</option>
+        <option value="index.html#forum">Forum</option>
+        <option value="index.html#downloads">Downloads</option>
+        <option value="about.html">About</option>
+      </select>
+    </div>
+  </div>
+  <header>
+    <img src="images/hx.png" alt="Hexenmeister Logo" class="header-img">
+  </header>
+  <div class="container">
+    <h1 class="glow">About Hexenmeister Tänzelcore</h1>
+    <div class="window-frame">
+      <div class="window-titlebar">About Us</div>
+      <div class="window-content">
+        <h2>Hexenmeister</h2>
+        <p>Hexenmeister is a Tänzelcore artist blending black metal, and synth. Since 2022, they’ve released works like <em>Pilzritual Der Hexen</em> and <em>Ein Geist In Einem Glaskolben</em>, often collaborating with labels like Okkultes Blut and Narbentage Produktionen.</p>
+        <h2>About This Site</h2>
+        <p> I created this site to share their music for free, as per their wish to not monetize their art. Enjoy the music!</p>
+        <h2>Contact</h2>
+        <p>For inquiries, email me at <a href="mailto:hemostatrecords@gmail.com" style="color: #00cc00;">hemostatrecords@gmail.com</a>.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>© 2025 Hexenmeister Tänzelcore Forum. All rights reserved.</p>
+  </footer>
+</body>
+</html>
