@@ -523,11 +523,28 @@
       height: auto;
       border: 1px solid #4a4a4a;
     }
+    .shop-btn {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: #00ff00;
+    border: 1px solid #4a4a4a;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 14px;
+}
+.shop-btn:hover {
+    background-color: #444;
+}
   </style>
 </head>
 <body>
   <div class="nav-container">
     <button class="settings-btn" onclick="debugSettingsClick()">Einstellungen</button>
+    <button class="shop-btn" onclick="window.location.href='shopgerman.html'">Laden</button>
     <div class="nav-menu">
       <select onchange="window.location.href=this.value">
         <option value="">Navigieren</option>

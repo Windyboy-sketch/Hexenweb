@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hexenmeister Tänzelcore Merchandise</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      background-color: #0f0f0f;
+      color: #00ff00;
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+    .nav-container {
+      text-align: center;
+      padding: 10px;
+      background-color: #1a1a1a;
+      border-bottom: 3px solid #4a4a4a;
+      position: relative;
+    }
+    .nav-menu {
+      display: inline-block;
+      background-color: #222;
+      border: 1px solid #4a4a4a;
+    }
+    .nav-menu select {
+      background-color: #222;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .nav-menu select option {
+      background-color: #222;
+      color: #00ff00;
+    }
+    .nav-menu select:hover {
+      background-color: #333;
+    }
+    .settings-btn {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #333;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-family: 'Tahoma', sans-serif;
+      font-size: 14px;
+    }
+    .settings-btn:hover {
+      background-color: #444;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px;
+      text-align: center;
+      border-bottom: 3px solid #4a4a4a;
+    }
+    header img {
+      max-width: 350px;
+      vertical-align: middle;
+      border: 2px solid #4a4a4a;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 15px;
+      background-color: #1a1a1a;
+      border: 2px solid #4a4a4a;
+    }
+    h1 {
+      color: #00cc00;
+      text-align: center;
+      font-size: 26px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    h2 {
+      color: #00ff00;
+      font-size: 20px;
+      border-bottom: 2px solid #4a4a4a;
+      padding-bottom: 5px;
+    }
+    .product-section {
+      background-color: #1a1a1a;
+      padding: 15px;
+      margin-top: 20px;
+      border: 2px solid #4a4a4a;
+    }
+    .product-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .product-images {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      max-width: 400px;
+      width: 100%;
+    }
+    .product-image {
+      width: 100%;
+      border: 2px solid #4a4a4a;
+    }
+    .product-details {
+      flex: 1;
+      min-width: 300px;
+    }
+    .product-title {
+      font-size: 24px;
+      color: #00cc00;
+      margin-bottom: 10px;
+    }
+    .product-price {
+      font-size: 20px;
+      color: #00ff00;
+      margin-bottom: 10px;
+    }
+    .limited-run {
+      font-size: 16px;
+      color: #ff4444;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .color-selector {
+      margin-bottom: 20px;
+    }
+    .color-selector label {
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    .color-selector select {
+      background-color: #222;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .color-selector select:hover {
+      background-color: #333;
+    }
+    .buy-btn {
+      background-color: #333;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-family: 'Tahoma', sans-serif;
+      font-size: 16px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .buy-btn:hover {
+      background-color: #444;
+    }
+    .features, .care-instructions {
+      margin-top: 20px;
+    }
+    .features ul, .care-instructions ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #1a1a1a;
+      color: #00ff00;
+      border-top: 2px solid #4a4a4a;
+      margin-top: 20px;
+    }
+    .glow {
+      text-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00, 0 0 15px #00cc00;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      display: none;
+    }
+    .purchase-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #1a1a1a;
+      border: 2px solid #00ff00;
+      padding: 20px;
+      z-index: 2000;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      display: none;
+    }
+    .purchase-popup p {
+      margin: 0 0 15px;
+      font-size: 16px;
+    }
+    .purchase-popup a {
+      color: #00cc00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .purchase-popup a:hover {
+      text-decoration: underline;
+    }
+    .purchase-popup button {
+      background-color: #333;
+      color: #00ff00;
+      border: 1px solid #4a4a4a;
+      padding: 5px 15px;
+      cursor: pointer;
+      font-family: 'Tahoma', sans-serif;
+      font-size: 14px;
+    }
+    .purchase-popup button:hover {
+      background-color: #444;
+    }
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-container">
+    <button class="settings-btn" onclick="debugSettingsClick()">Настройки</button>
+    <div class="nav-menu">
+      <select onchange="window.location.href=this.value">
+        <option value="">Навигация</option>
+        <option value="index.html#home">Главная</option>
+        <option value="index.html#discography">Дискография</option>
+        <option value="index.html#news">Новости</option>
+        <option value="index.html#forum">Форум</option>
+        <option value="index.html#downloads">Загрузки</option>
+        <option value="index.html#admin-inbox">Admin‑Почта</option>
+        <option value="about.html">О нас</option>
+      </select>
+    </div>
+  </div>
+  <header>
+    <img src="images/hx.png" alt="Логотип Hexenmeister" class="header-img">
+  </header>
+  <div class="container">
+    <h1 class="glow">Hexenmeister Tänzelcore Мерч</h1>
+    <div class="product-section">
+      <h2>«Pilzritual Der Hexen» – Лимитированный лонгслив</h2>
+      <div class="product-container">
+        <div class="product-images">
+          <img id="product-image-front" src="images/hexblackfront.jpg" alt="Pilzritual Der Hexen Лонгслив - Перед (Чёрный)" class="product-image">
+          <img id="product-image-back" src="images/hexblackback.jpg" alt="Pilzritual Der Hexen Лонгслив - Спина (Чёрный)" class="product-image">
+        </div>
+        <div class="product-details">
+          <div class="product-title">«Pilzritual Der Hexen» – Лимитированный лонгслив</div>
+          <div class="product-price">45,00 $ USD</div>
+          <div class="limited-run">Ограниченный тираж: всего 10 штук</div>
+          <div class="color-selector">
+            <label for="color-select">Цвет:</label>
+            <select id="color-select" onchange="changeProductImages()">
+              <option value="black" selected>Чёрный</option>
+              <option value="white">Белый</option>
+              <option value="pink">Розовый</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="showPurchasePopup()">Купить сейчас</button>
+          <div class="features">
+            <h3>Особенности продукта</h3>
+            <ul>
+              <li>Экологически чистый хлопок для винтажного ощущения</li>
+              <li>Бесшовный крой уменьшает отходы ткани</li>
+              <li>Ребристый ворот устойчив к деформации</li>
+              <li>Укрепляющая тесьма на плечах предотвращает растягивание</li>
+              <li>Классический крой, средняя плотность ткани (6,0 oz/yd²)</li>
+            </ul>
+          </div>
+          <div class="care-instructions">
+            <h3>Инструкции по уходу</h3>
+            <ul>
+              <li>Использовать бесхлорный отбеливатель</li>
+              <li>Не подвергать химчистке</li>
+              <li>Машинная стирка: холодная вода (до 30 °C)</li>
+              <li>Сушка в машинке: средняя температура</li>
+              <li>Не гладить</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>© 2025 Hexenmeister Tänzelcore Форум. Все права защищены.</p>
+  </footer>
+  <div id="overlay" class="overlay"></div>
+  <div id="purchase-popup" class="purchase-popup">
+    <p>Мне лень делать корзину — пиши в Instagram <a href="https://www.instagram.com/calebpookie79" target="_blank">@calebpookie79</a> или в Telegram <a href="https://t.me/wormphlegm" target="_blank">@wormphlegm</a>!</p>
+    <p>Обратите внимание: доставка в Россию и Беларусь недоступна из-за международных санкций.</p>
+    <button onclick="closePurchasePopup()">Закрыть</button>
+  </div>
+  <script>
+    function changeProductImages() {
+      const colorSelect = document.getElementById('color-select');
+      const frontImage = document.getElementById('product-image-front');
+      const backImage = document.getElementById('product-image-back');
+      const color = colorSelect.value;
+      frontImage.src = `images/hex${color}front.jpg`;
+      backImage.src = `images/hex${color}back.jpg`;
+      frontImage.alt = `Pilzritual Der Hexen Лонгслив - Перед (${color.charAt(0).toUpperCase() + color.slice(1)})`;
+      backImage.alt = `Pilzritual Der Hexen Лонгслив - Спина (${color.charAt(0).toUpperCase() + color.slice(1)})`;
+    }
+
+    function showPurchasePopup() {
+      document.getElementById('overlay').classList.add('show');
+      document.getElementById('purchase-popup').classList.add('show');
+    }
+
+    function closePurchasePopup() {
+      document.getElementById('overlay').classList.remove('show');
+      document.getElementById('purchase-popup').classList.remove('show');
+    }
+
+    window.debugSettingsClick = function() {
+      window.location.href = 'index.html#language';
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('color-select').value = 'black';
+      changeProductImages();
+    });
+  </script>
+</body>
+</html>
