@@ -1,1442 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hexenmeister Tänzelcore Forum</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Tahoma', sans-serif;
-      background-color: #0f0f0f;
-      color: #00ff00;
-      line-height: 1.5;
-      overflow-y: scroll;
-      padding-bottom: 60px;
-    }
-    .nav-container {
-      text-align: center;
-      padding: 10px;
-      background-color: #1a1a1a;
-      border-bottom: 3px solid #4a4a4a;
-      position: relative;
-    }
-    .nav-menu {
-      display: inline-block;
-      background-color: #222;
-      border: 1px solid #4a4a4a;
-    }
-    .nav-menu select {
-      background-color: #222;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .nav-menu select option {
-      background-color: #222;
-      color: #00ff00;
-    }
-    .nav-menu select:hover {
-      background-color: #333;
-    }
-    .settings-btn {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 10px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-    }
-    .settings-btn:hover {
-      background-color: #444;
-    }
-    .shop-btn {
-      position: absolute;
-      left: 80px;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 10px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-    }
-    .shop-btn:hover {
-      background-color: #444;
-    }
-    header {
-      background-color: #1a1a1a;
-      padding: 10px;
-      text-align: center;
-      border-bottom: 3px solid #4a4a4a;
-    }
-    header img {
-      max-width: 350px;
-      vertical-align: middle;
-      border: 2px solid #4a4a4a;
-    }
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 15px;
-      background-color: #1a1a1a;
-      border: 2px solid #4a4a4a;
-    }
-    h1 {
-      color: #00cc00;
-      text-align: center;
-      font-size: 26px;
-      text-shadow: 1px 1px 2px #000;
-    }
-    h2 {
-      color: #00ff00;
-      font-size: 20px;
-      border-bottom: 2px solid #4a4a4a;
-      padding-bottom: 5px;
-    }
-    .music-player {
-      text-align: center;
-      margin: 20px 0;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #111;
-      color: #00ff00;
-      margin-bottom: 20px;
-    }
-    th, td {
-      padding: 8px;
-      border: 1px solid #4a4a4a;
-    }
-    th {
-      background-color: #222;
-    }
-    td a {
-      color: #00cc00;
-      text-decoration: none;
-    }
-    td a:hover {
-      text-decoration: underline;
-    }
-    .album-cover {
-      max-width: 50px;
-      height: auto;
-      border: 1px solid #4a4a4a;
-      vertical-align: middle;
-    }
-    .download-btn {
-      display: inline-block;
-      padding: 5px 10px;
-      background-color: #333;
-      color: #00ff00;
-      text-decoration: none;
-      border: 1px solid #4a4a4a;
-      border-radius: 3px;
-    }
-    .download-btn:hover {
-      background-color: #444;
-    }
-    .song-dropdown {
-      background-color: #222;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px;
-      width: 200px;
-      margin-right: 10px;
-    }
-    .play-btn {
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 15px;
-      cursor: pointer;
-    }
-    .play-btn:hover {
-      background-color: #444;
-    }
-    .forum-section {
-      background-color: #1a1a1a;
-      padding: 15px;
-      margin-top: 20px;
-      border: 2px solid #4a4a4a;
-    }
-    .comment-form textarea {
-      width: 100%;
-      height: 100px;
-      background-color: #111;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 10px;
-      resize: vertical;
-    }
-    .comment-form input[type="text"] {
-      width: 100%;
-      margin-bottom: 10px;
-      background-color: #111;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px;
-    }
-    .comment-form button {
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 15px;
-      cursor: pointer;
-    }
-    .comment-form button:hover {
-      background-color: #444;
-    }
-    .comment-list {
-      margin-top: 20px;
-    }
-    .comment {
-      background-color: #111;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #4a4a4a;
-    }
-    .comment .username {
-      font-weight: bold;
-      margin-bottom: 5px;
-      display: block;
-    }
-    .comment .timestamp {
-      font-size: 12px;
-      color: #666;
-      display: block;
-    }
-    footer {
-      text-align: center;
-      padding: 10px;
-      background-color: #1a1a1a;
-      color: #00ff00;
-      border-top: 2px solid #4a4a4a;
-      margin-top: 20px;
-    }
-    .glow {
-      text-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00, 0 0 15px #00cc00;
-    }
-    .window-frame {
-      background-color: #1a1a1a;
-      border: 2px solid #00ff00;
-      margin-bottom: 20px;
-    }
-    .window-titlebar {
-      background-color: #222;
-      padding: 5px;
-      color: #00ff00;
-      font-size: 12px;
-      border-bottom: 1px solid #4a4a4a;
-    }
-    .window-content {
-      padding: 10px;
-    }
-    .moon-guy {
-      display: block;
-      margin: 15px auto;
-      max-width: 150px;
-      border: 2px solid #4a4a4a;
-    }
-    .mini-player {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: #1a1a1a;
-      border-top: 2px solid #4a4a4a;
-      padding: 10px;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      gap: 10px;
-    }
-    .mini-player.show {
-      display: flex;
-    }
-    .mini-player span {
-      color: #00ff00;
-      font-size: 14px;
-      margin-right: 10px;
-      max-width: 200px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .mini-player button {
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 10px;
-      margin: 0 5px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-    }
-    .mini-player button:hover {
-      background-color: #444;
-    }
-    .mini-player input[type="range"] {
-      width: 200px;
-      margin: 0 10px;
-      accent-color: #00ff00;
-    }
-    .mini-player input[type="range"]::-webkit-slider-thumb {
-      background: #00ff00;
-    }
-    .mini-player .duration {
-      font-size: 12px;
-      color: #00ff00;
-      margin-left: 10px;
-    }
-    .mini-player .volume-container {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .mini-player .volume-container label {
-      font-size: 12px;
-      color: #00ff00;
-    }
-    .language-popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #1a1a1a;
-      border: 2px solid #00ff00;
-      padding: 20px;
-      z-index: 2000;
-      text-align: center;
-    }
-    .language-popup select {
-      background-color: #222;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-    .language-popup button {
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 15px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-    }
-    .language-popup button:hover {
-      background-color: #444;
-    }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-    }
-    .edit-request-modal, .news-request-modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #1a1a1a;
-      border: 2px solid #00ff00;
-      padding: 20px;
-      z-index: 2000;
-      text-align: left;
-      width: 90%;
-      max-width: 500px;
-    }
-    .edit-request-modal h3, .news-request-modal h3 {
-      margin-top: 0;
-      color: #00ff00;
-    }
-    .edit-request-modal select,
-    .edit-request-modal input[type="text"],
-    .edit-request-modal textarea,
-    .news-request-modal input[type="text"],
-    .news-request-modal textarea {
-      width: 100%;
-      background-color: #111;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px;
-      margin-bottom: 10px;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-    }
-    .edit-request-modal textarea,
-    .news-request-modal textarea {
-      height: 100px;
-      resize: vertical;
-    }
-    .edit-request-modal button,
-    .news-request-modal button {
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 15px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-      margin-right: 10px;
-    }
-    .edit-request-modal button:hover,
-    .news-request-modal button:hover {
-      background-color: #444;
-    }
-    .edit-btn, .add-album-btn, .add-news-btn {
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 10px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-      display: inline-block;
-      margin: 5px 0;
-    }
-    .edit-btn:hover, .add-album-btn:hover, .add-news-btn:hover {
-      background-color: #444;
-    }
-    .hidden {
-      display: none;
-    }
-    .admin-inbox {
-      margin-top: 20px;
-      background-color: #1a1a1a;
-      border: 2px solid #00ff00;
-      padding: 10px;
-    }
-    .request-item {
-      background-color: #111;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #4a4a4a;
-      border-radius: 3px;
-    }
-    .request-item h3 {
-      margin: 0 0 10px 0;
-      color: #00cc00;
-    }
-    .request-item ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-    .request-item li {
-      padding: 5px 0;
-      border-bottom: 1px solid #4a4a4a;
-    }
-    .request-item li:last-child {
-      border-bottom: none;
-    }
-    .request-item .label {
-      font-weight: bold;
-    }
-    .request-item .nested-list {
-      margin-left: 20px;
-    }
-    .request-item .status {
-      font-size: 12px;
-      color: #666;
-    }
-    .toggle-inbox-btn {
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 10px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-      margin: 10px 0;
-    }
-    .toggle-inbox-btn:hover {
-      background-color: #444;
-    }
-    .complete-btn {
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 10px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-      margin-top: 10px;
-    }
-    .complete-btn:hover {
-      background-color: #444;
-    }
-    .password-prompt {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #1a1a1a;
-      border: 2px solid #00ff00;
-      padding: 20px;
-      z-index: 2000;
-      text-align: center;
-    }
-    .password-prompt input {
-      background-color: #111;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px;
-      margin-bottom: 10px;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-    }
-    .password-prompt button {
-      background-color: #333;
-      color: #00ff00;
-      border: 1px solid #4a4a4a;
-      padding: 5px 15px;
-      cursor: pointer;
-      font-family: 'Tahoma', sans-serif;
-      font-size: 14px;
-      margin-right: 10px;
-    }
-    .password-prompt button:hover {
-      background-color: #444;
-    }
-    .news-item {
-      background-color: #111;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #4a4a4a;
-    }
-    .news-item .title {
-      font-weight: bold;
-      color: #00cc00;
-    }
-    .news-item .date {
-      font-size: 12px;
-      color: #666;
-      display: block;
-    }
-    .mini-album-cover {
-      max-width: 40px;
-      height: auto;
-      border: 1px solid #4a4a4a;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexenmeister Tänzelcore Forum</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="nav-container">
-    <button class="settings-btn" onclick="debugSettingsClick()">Settings</button>
-    <button class="shop-btn" onclick="window.location.href='shop.html'">Shop</button>
-    <div class="nav-menu">
-      <select onchange="window.location.href=this.value">
-        <option value="">Navigate</option>
-        <option value="#home">Home</option>
-        <option value="#discography">Discography</option>
-        <option value="#news">News</option>
-        <option value="#forum">Forum</option>
-        <option value="#downloads">Downloads</option>
-        <option value="#admin-inbox">Admin Inbox</option>
-        <option value="about.html">About</option>
-      </select>
-    </div>
-  </div>
-  <header>
-    <img src="images/hx.png" alt="Hexenmeister Logo" class="header-img">
-  </header>
-  <div class="container">
-    <img src="images/tanzel.png" alt="Tänzelcore Moon Guy" class="moon-guy">
-    <h1 id="home" class="glow">Hexenmeister Tänzelcore</h1>
-    <div class="music-player window-frame">
-      <div class="window-titlebar">Music Player</div>
-      <div class="window-content">
-        <h2>Welcome to the official Hexenmeister music forum page! I made this site for fans to listen to and download his music for free. I work with Hexenmeister on merch and sharing his art with the world. Since he prefers not to monetize his work, I suggested creating this site, and he agreed. Here it is, enjoy the music, my Tänzel friends!</h2>
-        <div>- Teodor</div>
-      </div>
-    </div>
-    <h2 id="discography" class="glow">Discography</h2>
-    <button class="add-album-btn" onclick="showEditRequestModal()">Request New Album</button>
-    <table>
-      <thead>
-        <tr>
-          <th>Cover</th>
-          <th>Title</th>
-          <th>Year</th>
-          <th>Label</th>
-          <th>Format</th>
-          <th>Tracks</th>
-          <th>Download</th>
-          <th>Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><img src="images/pilzritual-der-hexen.png" alt="Pilzritual Der Hexen Cover" class="album-cover"></td>
-          <td>Pilzritual Der Hexen</td>
-          <td>2022</td>
-          <td>Narbentage Produktionen</td>
-          <td>Cassette, Lathe Cut</td>
-          <td>
-            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text, 'images/pilzritual-der-hexen.png')">
-              <option value="">Select a song</option>
-              <option value="Pilzritual%20der%20hexen/01%20Hexenmeister%20-%20Intro.mp3">Hexenmeister - Intro</option>
-              <option value="Pilzritual%20der%20hexen/02%20Hexenmeister%20-%20Mushroom%20Ritual%20Of%20The%20Witches.mp3">Hexenmeister - Mushroom Ritual Of The Witches</option>
-              <option value="Pilzritual%20der%20hexen/03%20Hexenmeister%20-%20Auche%20Nach%20Grossvater%20Amanita.mp3">Hexenmeister - Auche Nach Grossvater Amanita</option>
-              <option value="Pilzritual%20der%20hexen/04%20Hexenmeister%20-%20Fliegenpilz.mp3">Hexenmeister - Fliegenpilz</option>
-              <option value="Pilzritual%20der%20hexen/05%20Hexenmeister%20-%20Daum%20Des%20Geistes.mp3">Hexenmeister - Daum Des Geistes</option>
-              <option value="Pilzritual%20der%20hexen/06%20Hexenmeister%20-%20Leben%20Besen.mp3">Hexenmeister - Leben Besen</option>
-              <option value="Pilzritual%20der%20hexen/07%20Hexenmeister%20-%20Outro.mp3">Hexenmeister - Outro</option>
+    <div class="nav-container">
+        <button class="settings-btn" onclick="debugSettingsClick()">Settings</button>
+        <button class="shop-btn" onclick="window.location.href='shop.html'">Shop</button>
+        <div class="nav-menu">
+            <select onchange="window.location.href=this.value">
+                <option value="">Navigate</option>
+                <option value="#home">Home</option>
+                <option value="#discography">Discography</option>
+                <option value="#news">News</option>
+                <option value="#forum">Forum</option>
+                <option value="#downloads">Downloads</option>
+                <option value="#admin-inbox">Admin Inbox</option>
+                <option value="about.html">About</option>
             </select>
-            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text, 'images/pilzritual-der-hexen.png')">Play</button>
-          </td>
-          <td>
-            <a href="/downloads/pilzritual-der-hexen.zip" class="download-btn">Download</a>
-          </td>
-          <td>
-            <button class="edit-btn" onclick="showEditRequestModal('Pilzritual Der Hexen')">Edit</button>
-          </td>
-        </tr>
-        <tr>
-          <td><img src="images/ein-geist-in-einem-glaskolben.png" alt="Ein Geist In Einem Glaskolben Cover" class="album-cover"></td>
-          <td>Ein Geist In Einem Glaskolben</td>
-          <td>2022</td>
-          <td>Okkultes Blut</td>
-          <td>Cassette (with Myrkyllinen Soppa)</td>
-          <td>
-            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text, 'images/ein-geist-in-einem-glaskolben.png')">
-              <option value="">Select a song</option>
-              <option value="EinGeist2022/Intro.mp3">Hexenmeister - Intro</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/02%20Hexenmeister%20-%20Kabinett%20Zerbrochenen%20Flaschen.flac">Hexenmeister - Kabinett Zerbrochenen Flaschen</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/03%20Hexenmeister%20-%20Geister%20Aus%20Zerbrochenen%20Flaschen.flac">Hexenmeister - Geister Aus Zerbrochenen Flaschen</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/04%20Hexenmeister%20-%20Hexen-Grammophon.flac">Hexenmeister - Hexen-Grammophon</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/05%20Hexenmeister%20-%20Wanderung%201.flac">Hexenmeister - Wanderung 1</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/06%20Hexenmeister%20-%20Wanderung%202.flac">Hexenmeister - Wanderung 2</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/07%20Hexenmeister%20-%20R%C3%BCckkehr%20Ins%20Kabinett%20Hexe.flac">Hexenmeister - Rückkehr Ins Kabinett Hexe</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/08%20Myrkyllinen%20Soppa%20-%20Tag%20And%20Y%C3%B6.flac">Myrkyllinen Soppa - Tag And Yö</option>
-              <option value="EinGeist2022/09_Vallilameta.mp3">Myrkyllinen Soppa - Vallilameta</option>
-              <option value="EinGeist2022/10_VirmeinenHaamutaistelu.mp3">Myrkyllinen Soppa - VirmeinenHaamutaistelu</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/11%20Myrkyllinen%20Soppa%20-%20Myrkyllinen%20Polkka.flac">Myrkyllinen Soppa - Myrkyllinen Polkka</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/12%20Myrkyllinen%20Soppa%20-%20Velhon%20Hulluus.flac">Myrkyllinen Soppa - Velhon Hulluus</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/13%20Myrkyllinen%20Soppa%20-%20Hengen.flac">Myrkyllinen Soppa - Hengen</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/14%20Myrkyllinen%20Soppa%20-%20Outro.flac">Myrkyllinen Soppa - Outro</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/Side%20A%20(Original).wav">Hexenmeister - Side A (Original)</option>
-              <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/Side%20B%20(Original).wav">Hexenmeister - Side B (Original)</option>
-            </select>
-            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text, 'images/ein-geist-in-einem-glaskolben.png')">Play</button>
-          </td>
-          <td>
-            <a href="/downloads/ein-geist-in-einem-glaskolben.zip" class="download-btn">Download</a>
-          </td>
-          <td>
-            <button class="edit-btn" onclick="showEditRequestModal('Ein Geist In Einem Glaskolben')">Edit</button>
-          </td>
-        </tr>
-        <tr>
-          <td><img src="images/68686-million-ghost-kamikaze-attack.png" alt="68686 Million Ghost Kamikaze Attack Cover" class="album-cover"></td>
-          <td>68686 Million Ghost Kamikaze Attack</td>
-          <td>2023</td>
-          <td>Okkultes Blut</td>
-          <td>Cassette (with Bogan Wytch)</td>
-          <td>
-            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text, 'images/68686-million-ghost-kamikaze-attack.png')">
-              <option value="">Select a song</option>
-              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A1%20-%20Bogan%20Wytch%20-%20Return%20To%20Shroomhead%20Swamp.mp3">Bogan Wytch - Return To Shroomhead Swamp</option>
-              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A2%20-%20Bogan%20Wytch%20-%20Kremling%20Kapers.mp3">Bogan Wytch - Kremling Kapers</option>
-              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A3%20-%20Bogan%20Wytch%20-%20Mystics%20In%20Bali.mp3">Bogan Wytch - Mystics In Bali</option>
-              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A4%20-%20Bogan%20Wytch%20-%20Ciggy%20Butt%20Brain.mp3">Bogan Wytch - Ciggy Butt Brain</option>
-              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A5%20-%20Bogan%20Wytch%20-%20Pazuzu%20Party%20(Dirty%20Mix).mp3">Bogan Wytch - Pazuzu Party (Dirty Mix)</option>
-              <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/B%20-%20Hexenmeister%20-%20Untitled%20+%20Hexen-Grammophon%20+%20Tanzelsession%20Um%20Mitternacht%20+%20Geist%20In%20Einer%20Socke%20+%20Plasmakolben.mp3">Hexenmeister - Untitled + Hexen-Grammophon + Tanzelsession Um Mitternacht + Geist In Einer Socke + Plasmakolben</option>
-            </select>
-            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text, 'images/68686-million-ghost-kamikaze-attack.png')">Play</button>
-          </td>
-          <td>
-            <a href="/downloads/68686-million-ghost-kamikaze-attack.zip" class="download-btn">Download</a>
-          </td>
-          <td>
-            <button class="edit-btn" onclick="showEditRequestModal('68686 Million Ghost Kamikaze Attack')">Edit</button>
-          </td>
-        </tr>
-        <tr>
-          <td><img src="images/morgendliche-pilzernte.png" alt="Morgendliche Pilzernte Cover" class="album-cover"></td>
-          <td>Morgendliche Pilzernte</td>
-          <td>2022</td>
-          <td>Narbentage Produktionen</td>
-          <td>Floppy Disk, EP</td>
-          <td>
-            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text, 'images/morgendliche-pilzernte.png')">
-              <option value="">Select a song</option>
-              <option value="Morgendliche%20Pilzernte/00%20-%20Morgendliche%20Pilzernte%20-%20Hexenmeister.mp3">Hexenmeister - Morgendliche Pilzernte</option>
-            </select>
-            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text, 'images/morgendliche-pilzernte.png')">Play</button>
-          </td>
-          <td>
-            <a href="/downloads/morgendliche-pilzernte.zip" class="download-btn">Download</a>
-          </td>
-          <td>
-            <button class="edit-btn" onclick="showEditRequestModal('Morgendliche Pilzernte')">Edit</button>
-          </td>
-        </tr>
-        <tr>
-          <td><img src="images/walpurgisnacht-floppies.png" alt="Walpurgisnacht Floppies Cover" class="album-cover"></td>
-          <td>Walpurgisnacht Floppies</td>
-          <td>2022</td>
-          <td>Narbentage Produktionen</td>
-          <td>Floppy Disk (with Satanic Warmaster)</td>
-          <td>
-            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text, 'images/walpurgisnacht-floppies.png')">
-              <option value="" disabled>Tracklist unavailable</option>
-            </select>
-            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text, 'images/walpurgisnacht-floppies.png')" disabled>Play</button>
-          </td>
-          <td>
-            <a href="/downloads/walpurgisnacht-floppies.zip" class="download-btn">Download</a>
-          </td>
-          <td>
-            <button class="edit-btn" onclick="showEditRequestModal('Walpurgisnacht Floppies')">Edit</button>
-          </td>
-        </tr>
-        <tr>
-          <td><img src="images/tanzelsession-um-mitternacht-remastered.png" alt="Tänzelsession Um Mitternacht (Remastered) Cover" class="album-cover"></td>
-          <td>Tänzelsession Um Mitternacht (Remastered)</td>
-          <td>2023</td>
-          <td>Okkultes Blut</td>
-          <td>Digital Remaster</td>
-          <td>
-            <select class="song-dropdown" onchange="if(this.value) playSong(this.value, this.options[this.selectedIndex].text, 'images/tanzelsession-um-mitternacht-remastered.png')">
-              <option value="">Select a song</option>
-              <option value="Tanzelsession/Tanzelsession.mp3">Hexenmeister - Tanzelsession</option>
-            </select>
-            <button class="play-btn" onclick="playSong(this.previousElementSibling.value, this.previousElementSibling.options[this.selectedIndex].text, 'images/tanzelsession-um-mitternacht-remastered.png')">Play</button>
-          </td>
-          <td>
-            <a href="/downloads/tanzelsession-um-mitternacht-remastered.zip" class="download-btn">Download</a>
-          </td>
-          <td>
-            <button class="edit-btn" onclick="showEditRequestModal('Tänzelsession Um Mitternacht (Remastered)')">Edit</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div id="news" class="window-frame">
-      <div class="window-titlebar">Latest News</div>
-      <div class="window-content">
-        <h2>News & Updates</h2>
-        <div id="news-list">
-          <p>Loading news...</p>
         </div>
-        <button class="add-news-btn" onclick="showAddNewsModal()">Request New Update</button>
-      </div>
     </div>
-    <div id="status" style="text-align: center; margin-top: 10px; color: #00ff00;"></div>
-    <div class="forum-section window-frame" id="forum">
-      <div class="window-titlebar">Community Discussion</div>
-      <div class="window-content">
-        <h2>Join the Tänzelcore coven! Share your thoughts below.</h2>
-        <div class="comment-form">
-          <input type="text" placeholder="Your username (optional)" maxlength="20">
-          <textarea placeholder="Your comment..."></textarea>
-          <button onclick="submitComment()">Submit</button>
+    <header>
+        <img src="images/hx.png" alt="Hexenmeister Logo" class="header-img">
+    </header>
+    <div class="container">
+        <img src="images/tanzel.png" alt="Tänzelcore Moon Guy" class="moon-guy">
+        <h1 id="home" class="glow">Hexenmeister Tänzelcore</h1>
+        <div class="music-player window-frame">
+            <div class="window-titlebar">Music Player</div>
+            <div class="window-content">
+                <h2>Welcome to the official Hexenmeister music forum page! I made this site for fans to listen to and download his music for free. I work with Hexenmeister on merch and sharing his art with the world. Since he prefers not to monetize his work, I suggested creating this site, and he agreed. Here it is, enjoy the music, my Tänzel friends!</h2>
+                <div>- Teodor</div>
+            </div>
         </div>
-        <div id="comment-list" class="comment-list"></div>
-      </div>
+        <h2 id="discography" class="glow">Discography</h2>
+        <button class="add-album-btn" onclick="showEditRequestModal()">Request New Album</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cover</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Label</th>
+                    <th>Format</th>
+                    <th>Tracks</th>
+                    <th>Download</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="images/a-cruel-parish.png" alt="A Cruel Parish Cover" class="album-cover"></td>
+                    <td>A Cruel Parish</td>
+                    <td>2021</td>
+                    <td>Self-released</td>
+                    <td>Digital</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/a-cruel-parish.png')">
+                            <option value="">Select a song</option>
+                            <option value="A%20Cruel%20Parish/A%20Cruel%20Parish.mp3">A Cruel Parish</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/a-cruel-parish.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/a-cruel-parish.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('A Cruel Parish')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/die-narren-zerschnitten-den-konig.png" alt="Die Narren Zerschnitten Den König Cover" class="album-cover"></td>
+                    <td>Die Narren Zerschnitten Den König</td>
+                    <td>2022</td>
+                    <td>Narbentage Produktionen</td>
+                    <td>Cassette</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/die-narren-zerschnitten-den-konig.png')">
+                            <option value="">Select a song</option>
+                            <option value="Die%20Narren%20Zerschnitten%20Den%20K%C3%B6nig/01%20Rodehetten%20-%20I.mp3">Rodehetten - I</option>
+                            <option value="Die%20Narren%20Zerschnitten%20Den%20K%C3%B6nig/02%20Rodehetten%20-%20II.mp3">Rodehetten - II</option>
+                            <option value="Die%20Narren%20Zerschnitten%20Den%20K%C3%B6nig/03%20Rodehetten%20-%20III.mp3">Rodehetten - III</option>
+                            <option value="Die%20Narren%20Zerschnitten%20Den%20K%C3%B6nig/04%20Rodehetten%20-%20IV.mp3">Rodehetten - IV</option>
+                            <option value="Die%20Narren%20Zerschnitten%20Den%20K%C3%B6nig/05%20Rodehetten%20-%20V.mp3">Rodehetten - V</option>
+                            <option value="Die%20Narren%20Zerschnitten%20Den%20K%C3%B6nig/06%20Rodehetten%20-%20VI.mp3">Rodehetten - VI</option>
+                            <option value="Die%20Narren%20Zerschnitten%20Den%20K%C3%B6nig/07%20Rodehetten%20-%20VII.mp3">Rodehetten - VII</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/die-narren-zerschnitten-den-konig.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/die-narren-zerschnitten-den-konig.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Die Narren Zerschnitten Den König')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/pilzritual-der-hexen.png" alt="Pilzritual Der Hexen Cover" class="album-cover"></td>
+                    <td>Pilzritual Der Hexen</td>
+                    <td>2022</td>
+                    <td>Narbentage Produktionen</td>
+                    <td>Cassette, Lathe Cut</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/pilzritual-der-hexen.png')">
+                            <option value="">Select a song</option>
+                            <option value="Pilzritual%20der%20hexen/01%20Hexenmeister%20-%20Intro.mp3">Hexenmeister - Intro</option>
+                            <option value="Pilzritual%20der%20hexen/02%20Hexenmeister%20-%20Mushroom%20Ritual%20Of%20The%20Witches.mp3">Hexenmeister - Mushroom Ritual Of The Witches</option>
+                            <option value="Pilzritual%20der%20hexen/03%20Hexenmeister%20-%20Auche%20Nach%20Grossvater%20Amanita.mp3">Hexenmeister - Auche Nach Grossvater Amanita</option>
+                            <option value="Pilzritual%20der%20hexen/04%20Hexenmeister%20-%20Fliegenpilz.mp3">Hexenmeister - Fliegenpilz</option>
+                            <option value="Pilzritual%20der%20hexen/05%20Hexenmeister%20-%20Daum%20Des%20Geistes.mp3">Hexenmeister - Daum Des Geistes</option>
+                            <option value="Pilzritual%20der%20hexen/06%20Hexenmeister%20-%20Leben%20Besen.mp3">Hexenmeister - Leben Besen</option>
+                            <option value="Pilzritual%20der%20hexen/07%20Hexenmeister%20-%20Outro.mp3">Hexenmeister - Outro</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/pilzritual-der-hexen.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/pilzritual-der-hexen.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Pilzritual Der Hexen')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/reaper-seele-der-sunder.png" alt="Reaper Seele Der Sünder Cover" class="album-cover"></td>
+                    <td>Reaper Seele Der Sünder</td>
+                    <td>2022</td>
+                    <td>Okkultes Blut</td>
+                    <td>Tape</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/reaper-seele-der-sunder.png')">
+                            <option value="">Select a song</option>
+                            <option value="Reaper%20Seele%20Der%20S%C3%BCnder/01%20Grabsch%C3%A4ndung%20-%20Intro.mp3">Grabschändung - Intro</option>
+                            <option value="Reaper%20Seele%20Der%20S%C3%BCnder/02%20Grabsch%C3%A4ndung%20-%20Luzifer%20warf%20das%20Zepter%20der%20Finsternis.mp3">Grabschändung - Luzifer warf das Zepter der Finsternis</option>
+                            <option value="Reaper%20Seele%20Der%20S%C3%BCnder/03%20Grabsch%C3%A4ndung%20-%20Der%20Todesritter%20verteidigt%20die%20Zitadelle%20der%20Finsternis.mp3">Grabschändung - Der Todesritter verteidigt die Zitadelle der Finsternis</option>
+                            <option value="Reaper%20Seele%20Der%20S%C3%BCnder/04%20Grabsch%C3%A4ndung%20-%20Gedanken%20%C3%BCber%20die%20ewige%20Dunkelheit.mp3">Grabschändung - Gedanken über die ewige Dunkelheit</option>
+                            <option value="Reaper%20Seele%20Der%20S%C3%BCnder/05%20Grabsch%C3%A4ndung%20-%20H%C3%B6llenschwert%20des%20gefallenen%20Engels.mp3">Grabschändung - Höllenschwert des gefallenen Engels</option>
+                            <option value="Reaper%20Seele%20Der%20S%C3%BCnder/06%20Grabsch%C3%A4ndung%20-%20Blutgetr%C3%A4nk-Ritus.mp3">Grabschändung - Blutgetränk-Ritus</option>
+                            <option value="Reaper%20Seele%20Der%20S%C3%BCnder/07%20Grabsch%C3%A4ndung%20-%20Outro.mp3">Grabschändung - Outro</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/reaper-seele-der-sunder.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/reaper-seele-der-sunder.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Reaper Seele Der Sünder')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/posthume-tanzelmaie.png" alt="Posthume Tanzelmaie Cover" class="album-cover"></td>
+                    <td>Posthume Tanzelmaie</td>
+                    <td>2022</td>
+                    <td>Phantom Lure</td>
+                    <td>Tape</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/posthume-tanzelmaie.png')">
+                            <option value="">Select a song</option>
+                            <option value="Posthume%20Tanzelmaie/Posthume%20Tanzelmaie.mp3">Posthume Tanzelmaie</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/posthume-tanzelmaie.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/posthume-tanzelmaie.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Posthume Tanzelmaie')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/ein-geist-in-einem-glaskolben.png" alt="Ein Geist In Einem Glaskolben Cover" class="album-cover"></td>
+                    <td>Ein Geist In Einem Glaskolben</td>
+                    <td>2022</td>
+                    <td>Okkultes Blut</td>
+                    <td>Cassette (with Myrkyllinen Soppa)</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/ein-geist-in-einem-glaskolben.png')">
+                            <option value="">Select a song</option>
+                            <option value="EinGeist2022/Intro.mp3">Hexenmeister - Intro</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/02%20Hexenmeister%20-%20Kabinett%20Zerbrochenen%20Flaschen.flac">Hexenmeister - Kabinett Zerbrochenen Flaschen</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/03%20Hexenmeister%20-%20Geister%20Aus%20Zerbrochenen%20Flaschen.flac">Hexenmeister - Geister Aus Zerbrochenen Flaschen</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/04%20Hexenmeister%20-%20Hexen-Grammophon.flac">Hexenmeister - Hexen-Grammophon</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/05%20Hexenmeister%20-%20Wanderung%201.flac">Hexenmeister - Wanderung 1</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/06%20Hexenmeister%20-%20Wanderung%202.flac">Hexenmeister - Wanderung 2</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/07%20Hexenmeister%20-%20R%C3%BCckkehr%20Ins%20Kabinett%20Hexe.flac">Hexenmeister - Rückkehr Ins Kabinett Hexe</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/08%20Myrkyllinen%20Soppa%20-%20Tag%20And%20Y%C3%B6.flac">Myrkyllinen Soppa - Tag And Yö</option>
+                            <option value="EinGeist2022/09_Vallilameta.mp3">Myrkyllinen Soppa - Vallilameta</option>
+                            <option value="EinGeist2022/10_VirmeinenHaamutaistelu.mp3">Myrkyllinen Soppa - VirmeinenHaamutaistelu</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/11%20Myrkyllinen%20Soppa%20-%20Myrkyllinen%20Polkka.flac">Myrkyllinen Soppa - Myrkyllinen Polkka</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/12%20Myrkyllinen%20Soppa%20-%20Velhon%20Hulluus.flac">Myrkyllinen Soppa - Velhon Hulluus</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/13%20Myrkyllinen%20Soppa%20-%20Hengen.flac">Myrkyllinen Soppa - Hengen</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/14%20Myrkyllinen%20Soppa%20-%20Outro.flac">Myrkyllinen Soppa - Outro</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/Side%20A%20(Original).wav">Hexenmeister - Side A (Original)</option>
+                            <option value="(2022)%20Ein%20Geist%20In%20Einem%20Glaskolben/Side%20B%20(Original).wav">Hexenmeister - Side B (Original)</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/ein-geist-in-einem-glaskolben.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/ein-geist-in-einem-glaskolben.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Ein Geist In Einem Glaskolben')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/morgendliche-pilzernte.png" alt="Morgendliche Pilzernte Cover" class="album-cover"></td>
+                    <td>Morgendliche Pilzernte</td>
+                    <td>2022</td>
+                    <td>Narbentage Produktionen</td>
+                    <td>Floppy Disk, EP</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/morgendliche-pilzernte.png')">
+                            <option value="">Select a song</option>
+                            <option value="Morgendliche%20Pilzernte/00%20-%20Morgendliche%20Pilzernte%20-%20Hexenmeister.mp3">Hexenmeister - Morgendliche Pilzernte</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/morgendliche-pilzernte.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/morgendliche-pilzernte.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Morgendliche Pilzernte')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/walpurgisnacht-floppies.png" alt="Walpurgisnacht Floppies Cover" class="album-cover"></td>
+                    <td>Walpurgisnacht Floppies</td>
+                    <td>2022</td>
+                    <td>Narbentage Produktionen</td>
+                    <td>Floppy Disk (with Satanic Warmaster)</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/walpurgisnacht-floppies.png')">
+                            <option value="" disabled>Tracklist unavailable</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/walpurgisnacht-floppies.png')" disabled>Play</button>
+                    </td>
+                    <td><a href="/downloads/walpurgisnacht-floppies.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Walpurgisnacht Floppies')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/timchenko-nase.png" alt="Timchenko - Nase Cover" class="album-cover"></td>
+                    <td>Timchenko - Nase</td>
+                    <td>2023</td>
+                    <td>Unknown</td>
+                    <td>Unknown</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/timchenko-nase.png')">
+                            <option value="">Select a song</option>
+                            <option value="Timchenko%20-%20Nase/Nase.mp3">Timchenko - Nase</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/timchenko-nase.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/timchenko-nase.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Timchenko - Nase')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/shrooms-terror-split.png" alt="Shrooms Terror Split with Spritzenwirbel Cover" class="album-cover"></td>
+                    <td>Shrooms Terror Split with Spritzenwirbel</td>
+                    <td>2023</td>
+                    <td>БѢДСТВІЕ / Junkie And Proud</td>
+                    <td>Cassette</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/shrooms-terror-split.png')">
+                            <option value="">Select a song</option>
+                            <option value="Shrooms%20Terror%20Split/01%20-%20Experimentation%20-%20Spirtzenwirbel%20&%20Drugparty.mp3">Spirtzenwirbel & Drugparty - Experimentation</option>
+                            <option value="Shrooms%20Terror%20Split/02%20-%20Purgative%20(Dilated%20Dissolution)%20-%20Spirtzenwirbel%20&%20Drugparty.mp3">Spirtzenwirbel & Drugparty - Purgative (Dilated Dissolution)</option>
+                            <option value="Shrooms%20Terror%20Split/03%20-%20Transformation%20-%20Spirtzenwirbel%20&%20Drugparty.mp3">Spirtzenwirbel & Drugparty - Transformation</option>
+                            <option value="Shrooms%20Terror%20Split/04%20-%20A%20Cruel%20Parish%20-%20Spirtzenwirbel%20&%20Drugparty.mp3">Spirtzenwirbel & Drugparty - A Cruel Parish</option>
+                            <option value="Shrooms%20Terror%20Split/05%20-%20Fractal%20Dream%20-%20Spirtzenwirbel%20&%20Drugparty.mp3">Spirtzenwirbel & Drugparty - Fractal Dream</option>
+                            <option value="Shrooms%20Terror%20Split/06%20-%20Electric%20Shock%20-%20Spirtzenwirbel%20&%20Drugparty.mp3">Spirtzenwirbel & Drugparty - Electric Shock</option>
+                            <option value="Shrooms%20Terror%20Split/07%20-%20Never%20Stop%20The%20Shrooms%20-%20Spirtzenwirbel%20&%20Drugparty.mp3">Spirtzenwirbel & Drugparty - Never Stop The Shrooms</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/shrooms-terror-split.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/shrooms-terror-split.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Shrooms Terror Split with Spritzenwirbel')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/68686-million-ghost-kamikaze-attack.png" alt="68686 Million Ghost Kamikaze Attack Cover" class="album-cover"></td>
+                    <td>68686 Million Ghost Kamikaze Attack</td>
+                    <td>2023</td>
+                    <td>Okkultes Blut</td>
+                    <td>Cassette (with Bogan Wytch)</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/68686-million-ghost-kamikaze-attack.png')">
+                            <option value="">Select a song</option>
+                            <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A1%20-%20Bogan%20Wytch%20-%20Return%20To%20Shroomhead%20Swamp.mp3">Bogan Wytch - Return To Shroomhead Swamp</option>
+                            <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A2%20-%20Bogan%20Wytch%20-%20Kremling%20Kapers.mp3">Bogan Wytch - Kremling Kapers</option>
+                            <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A3%20-%20Bogan%20Wytch%20-%20Mystics%20In%20Bali.mp3">Bogan Wytch - Mystics In Bali</option>
+                            <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A4%20-%20Bogan%20Wytch%20-%20Ciggy%20Butt%20Brain.mp3">Bogan Wytch - Ciggy Butt Brain</option>
+                            <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/A5%20-%20Bogan%20Wytch%20-%20Pazuzu%20Party%20(Dirty%20Mix).mp3">Bogan Wytch - Pazuzu Party (Dirty Mix)</option>
+                            <option value="(2023)%2068686%20Million%20Ghost%20Kamikaze%20Attack/B%20-%20Hexenmeister%20-%20Untitled%20+%20Hexen-Grammophon%20+%20Tanzelsession%20Um%20Mitternacht%20+%20Geist%20In%20Einer%20Socke%20+%20Plasmakolben.mp3">Hexenmeister - Untitled + Hexen-Grammophon + Tanzelsession Um Mitternacht + Geist In Einer Socke + Plasmakolben</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/68686-million-ghost-kamikaze-attack.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/68686-million-ghost-kamikaze-attack.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('68686 Million Ghost Kamikaze Attack')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/tanzelsession-um-mitternacht-remastered.png" alt="Tänzelsession Um Mitternacht (Remastered) Cover" class="album-cover"></td>
+                    <td>Tänzelsession Um Mitternacht (Remastered)</td>
+                    <td>2023</td>
+                    <td>Okkultes Blut</td>
+                    <td>Digital Remaster</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/tanzelsession-um-mitternacht-remastered.png')">
+                            <option value="">Select a song</option>
+                            <option value="Tanzelsession/Tanzelsession.mp3">Hexenmeister - Tanzelsession</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/tanzelsession-um-mitternacht-remastered.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/tanzelsession-um-mitternacht-remastered.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Tänzelsession Um Mitternacht (Remastered)')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/dancing.png" alt="Dancing Cover" class="album-cover"></td>
+                    <td>Dancing</td>
+                    <td>2024</td>
+                    <td>Self-released</td>
+                    <td>Digital</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/dancing.png')">
+                            <option value="">Select a song</option>
+                            <option value="Dancing/Dancing.mp3">Dancing</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/dancing.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/dancing.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Dancing')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/dj-hex.png" alt="DJ Hex Cover" class="album-cover"></td>
+                    <td>DJ Hex</td>
+                    <td>2024</td>
+                    <td>Self-released</td>
+                    <td>Digital</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/dj-hex.png')">
+                            <option value="">Select a song</option>
+                            <option disabled>Tracklist unavailable</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/dj-hex.png')" disabled>Play</button>
+                    </td>
+                    <td><a href="/downloads/dj-hex.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('DJ Hex')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/isho.png" alt="Ишо Cover" class="album-cover"></td>
+                    <td>Ишо</td>
+                    <td>2024</td>
+                    <td>Self-released</td>
+                    <td>Digital</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/isho.png')">
+                            <option value="">Select a song</option>
+                            <option value="%D0%98%D1%88%D0%BE/isho.mp3">Ишо</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/isho.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/isho.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Ишо')">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><img src="images/eto-koroche-withinfections.png" alt="Eto Koroche Withinfections Cover" class="album-cover"></td>
+                    <td>Eto Koroche Withinfections</td>
+                    <td>2025</td>
+                    <td>Self-released</td>
+                    <td>Digital</td>
+                    <td>
+                        <select class="song-dropdown" onchange="if(this.value)playSong(this.value,this.options[this.selectedIndex].text,'images/eto-koroche-withinfections.png')">
+                            <option value="">Select a song</option>
+                            <option value="Eto%20Koroche%20Withinfections/ETO%20KOROCHE%20WITHINFECTIONSS.mp3">ETO KOROCHE WITHINFECTIONSS</option>
+                        </select>
+                        <button class="play-btn" onclick="playSong(this.previousElementSibling.value,this.previousElementSibling.options[this.selectedIndex].text,'images/eto-koroche-withinfections.png')">Play</button>
+                    </td>
+                    <td><a href="/downloads/eto-koroche-withinfections.zip" class="download-btn">Download</a></td>
+                    <td><button class="edit-btn" onclick="showEditRequestModal('Eto Koroche Withinfections')">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="news" class="window-frame">
+            <div class="window-titlebar">Latest News</div>
+            <div class="window-content">
+                <h2>News & Updates</h2>
+                <div id="news-list">
+                    <p>Loading news...</p>
+                </div>
+                <button class="add-news-btn" onclick="showAddNewsModal()">Request New Update</button>
+            </div>
+        </div>
+        <div id="status" style="text-align:center;margin-top:10px;color:#0f0"></div>
+        <div class="forum-section window-frame" id="forum">
+            <div class="window-titlebar">Community Discussion</div>
+            <div class="window-content">
+                <h2>Join the Tänzelcore coven! Share your thoughts below.</h2>
+                <div class="comment-form">
+                    <input type="text" placeholder="Your username (optional)" maxlength="20">
+                    <textarea placeholder="Your comment..."></textarea>
+                    <button onclick="submitComment()">Submit</button>
+                </div>
+                <div id="comment-list" class="comment-list"></div>
+            </div>
+        </div>
+        <div id="downloads" class="window-frame">
+            <div class="window-titlebar">Downloads</div>
+            <div class="window-content">
+                <h2>Download Hexenmeister Releases</h2>
+                <p><strong>Complete Discography</strong> (includes all releases listed below except Walpurgisnacht Floppies):</p>
+                <a href="/downloads/HexenmeisterDiscog.zip" class="download-btn">Download All (465 MB)</a>
+                <p><strong>Individual Albums:</strong></p>
+                <ul>
+                    <li><a href="/downloads/a-cruel-parish.zip" class="download-btn">A Cruel Parish (3.6 MB)</a></li>
+                    <li><a href="/downloads/die-narren-zerschnitten-den-konig.zip" class="download-btn">Die Narren Zerschnitten Den König (17.5 MB)</a></li>
+                    <li><a href="/downloads/pilzritual-der-hexen.zip" class="download-btn">Pilzritual Der Hexen (10.3 MB)</a></li>
+                    <li><a href="/downloads/reaper-seele-der-sunder.zip" class="download-btn">Reaper Seele Der Sünder (20.8 MB)</a></li>
+                    <li><a href="/downloads/posthume-tanzelmaie.zip" class="download-btn">Posthume Tanzelmaie (15.9 MB)</a></li>
+                    <li><a href="/downloads/ein-geist-in-einem-glaskolben.zip" class="download-btn">Ein Geist In Einem Glaskolben (483 MB)</a></li>
+                    <li><a href="/downloads/morgendliche-pilzernte.zip" class="download-btn">Morgendliche Pilzernte (10.1 MB)</a></li>
+                    <li><a href="/downloads/timchenko-nase.zip" class="download-btn">Timchenko - Nase (1.5 MB)</a></li>
+                    <li><a href="/downloads/shrooms-terror-split.zip" class="download-btn">Shrooms Terror Split with Spritzenwirbel (96.4 MB)</a></li>
+                    <li><a href="/downloads/68686-million-ghost-kamikaze-attack.zip" class="download-btn">68686 Million Ghost Kamikaze Attack (76 MB)</a></li>
+                    <li><a href="/downloads/tanzelsession-um-mitternacht-remastered.zip" class="download-btn">Tänzelsession Um Mitternacht (Remastered) (3.6 MB)</a></li>
+                    <li><a href="/downloads/dancing.zip" class="download-btn">Dancing (9.4 MB)</a></li>
+                    <li><a href="/downloads/dj-hex.zip" class="download-btn">DJ Hex (3.8 MB)</a></li>
+                    <li><a href="/downloads/isho.zip" class="download-btn">Ишо (2.1 MB)</a></li>
+                    <li><a href="/downloads/eto-koroche-withinfections.zip" class="download-btn">Eto Koroche Withinfections (3.6 MB)</a></li>
+                </ul>
+                <p><em>Note:</em> "Walpurgisnacht Floppies" is NOT included in the complete discography.</p>
+            </div>
+        </div>
+        <div id="admin-inbox-section" class="window-frame">
+            <div class="window-titlebar">Admin Inbox Controls</div>
+            <div class="window-content">
+                <button class="toggle-inbox-btn" onclick="toggleAdminInbox()">Show Admin Inbox</button>
+                <div id="admin-inbox" class="admin-inbox hidden">
+                    <h2 id="admin-inbox-title">Pending Edit Requests</h2>
+                    <div id="request-list"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="downloads" class="window-frame">
-      <div class="window-titlebar">Downloads</div>
-      <div class="window-content">
-        <h2>Download Hexenmeister Releases</h2>
-        <p><strong>Complete Discography</strong> (includes all releases listed below):</p>
-        <a href="/downloads/HexenmeisterDiscog.zip" class="download-btn">Download All (595 MB)</a>
-        <p><strong>Individual Albums:</strong></p>
-        <ul>
-          <li><a href="/downloads/pilzritual-der-hexen.zip" class="download-btn">Pilzritual Der Hexen (10.3 MB)</a></li>
-          <li><a href="/downloads/ein-geist-in-einem-glaskolben.zip" class="download-btn">Ein Geist In Einem Glaskolben (495 MB)</a></li>
-          <li><a href="/downloads/68686-million-ghost-kamikaze-attack.zip" class="download-btn">68686 Million Ghost Kamikaze Attack (76 MB)</a></li>
-          <li><a href="/downloads/morgendliche-pilzernte.zip" class="download-btn">Morgendliche Pilzernte (10.1 MB)</a></li>
-          <li><a href="/downloads/tanzelsession-um-mitternacht-remastered.zip" class="download-btn">Tänzelsession Um Mitternacht (Remastered) (3.6 MB)</a></li>
-        </ul>
-        <p><em>Note:</em> "Walpurgisnacht Floppies" is NOT included in the complete discography.</p>
-      </div>
+    <footer>
+        <p>© 2025 Hexenmeister Tänzelcore Forum. All rights reserved.</p>
+    </footer>
+    <div id="mini-player" class="mini-player">
+        <img id="mini-album-cover" src="" alt="Album Cover" class="mini-album-cover">
+        <div class="song-info">
+            <span id="current-artist"></span>
+            <span id="current-song"></span>
+            <span id="duration" class="duration">00:00 / 00:00</span>
+        </div>
+        <div class="controls">
+            <button onclick="rewind()">⏪ Rewind</button>
+            <button id="play-pause-btn" onclick="togglePlayPause()">Play</button>
+            <button onclick="stopSong()">⏹ Stop</button>
+            <button onclick="fastForward()">Fast Forward ⏩</button>
+        </div>
+        <input type="range" id="progress-bar" min="0" max="100" value="0" oninput="seek()">
+        <div class="volume-container">
+            <label for="volume-slider">Vol:</label>
+            <input type="range" id="volume-slider" min="0" max="100" value="80" oninput="adjustVolume()">
+        </div>
     </div>
-    <div id="admin-inbox-section" class="window-frame">
-      <div class="window-titlebar">Admin Inbox Controls</div>
-      <div class="window-content">
-        <button class="toggle-inbox-btn" onclick="toggleAdminInbox()">Show Admin Inbox</button>
-        <div id="admin-inbox" class="admin-inbox hidden">
-          <h2 id="admin-inbox-title">Pending Edit Requests</h2>
-          <div id="request-list"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer>
-    <p>© 2025 Hexenmeister Tänzelcore Forum. All rights reserved.</p>
-  </footer>
-<div id="mini-player" class="mini-player">
-  <img id="mini-album-cover" src="" alt="Album Cover" class="mini-album-cover">
-  <div class="song-info">
-    <span id="current-artist"></span>
-    <span id="current-song"></span>
-    <span id="duration" class="duration">00:00 / 00:00</span>
-  </div>
-  <div class="controls">
-    <button onclick="rewind()">⏪ Rewind</button>
-    <button id="play-pause-btn" onclick="togglePlayPause()">Play</button>
-    <button onclick="stopSong()">⏹ Stop</button>
-    <button onclick="fastForward()">Fast Forward ⏩</button>
-  </div>
-  <input type="range" id="progress-bar" min="0" max="100" value="0" oninput="seek()">
-  <div class="volume-container">
-    <label for="volume-slider">Vol:</label>
-    <input type="range" id="volume-slider" min="0" max="100" value="80" oninput="adjustVolume()">
-  </div>
-</div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
-
-    let app, db;
-    try {
-      const firebaseConfig = {
-        apiKey: "AIzaSyBh6ksJhbijU9UGTqQjJrg7Pmj51pGxD70",
-        authDomain: "hexenmeister-c729a.firebaseapp.com",
-        databaseURL: "https://hexenmeister-c729a-default-rtdb.firebaseio.com",
-        projectId: "hexenmeister-c729a",
-        storageBucket: "hexenmeister-c729a.firebasestorage.app",
-        messagingSenderId: "109414203696",
-        appId: "1:109414203696:web:c95bcb88f039cff6f888f5",
-        measurementId: "G-FNXVV1VEWL"
-      };
-      app = initializeApp(firebaseConfig);
-      db = getFirestore(app);
-      console.log("Firebase initialized successfully");
-    } catch (error) {
-      console.error("Firebase initialization failed:", error);
-      document.getElementById("status").textContent = "Firebase error: Check console for details";
-    }
-
-    // Audio Player
-    let currentAudio = null;
-    let currentSongName = "";
-    let currentCover = "";
-
-    window.playSong = function(audioUrl, songName, coverUrl) {
-      if (!audioUrl) {
-        document.getElementById("status").textContent = "Error: Select a song";
-        return;
-      }
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-      }
-      currentAudio = new Audio(audioUrl);
-      currentAudio.volume = document.getElementById("volume-slider").value / 100;
-      currentCover = coverUrl;
-      currentAudio.play().then(() => {
-        const miniPlayer = document.getElementById("mini-player");
-        miniPlayer.classList.add("show");
-        currentSongName = songName;
-        const artistMatch = songName.match(/^([^-\s]+)\s*-/);
-        const artist = artistMatch ? artistMatch[1] : "Unknown";
-        document.getElementById("current-song").textContent = songName;
-        document.getElementById("current-artist").textContent = artist;
-        document.getElementById("mini-album-cover").src = currentCover;
-        document.getElementById("status").textContent = `Playing: ${songName}`;
-        document.getElementById("play-pause-btn").textContent = "Pause";
-        currentAudio.addEventListener("timeupdate", updateProgress);
-        currentAudio.addEventListener("ended", stopSong);
-      }).catch(error => {
-        console.error("Audio playback failed:", error);
-        document.getElementById("status").textContent = "Audio error: Check console";
-      });
-    };
-
-    window.togglePlayPause = function() {
-      if (!currentAudio) {
-        document.getElementById("status").textContent = "No audio to play";
-        return;
-      }
-      if (currentAudio.paused) {
-        currentAudio.play();
-        document.getElementById("play-pause-btn").textContent = "Pause";
-        document.getElementById("status").textContent = `Playing: ${currentSongName}`;
-      } else {
-        currentAudio.pause();
-        document.getElementById("play-pause-btn").textContent = "Play";
-        document.getElementById("status").textContent = `Paused: ${currentSongName}`;
-      }
-    };
-
-    window.rewind = function() {
-      if (currentAudio) {
-        currentAudio.currentTime = Math.max(0, currentAudio.currentTime - 10);
-      }
-    };
-
-    window.fastForward = function() {
-      if (currentAudio) {
-        currentAudio.currentTime = Math.min(currentAudio.duration, currentAudio.currentTime + 10);
-      }
-    };
-
-    window.stopSong = function() {
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio = null;
-        currentSongName = "";
-        currentCover = "";
-        const miniPlayer = document.getElementById("mini-player");
-        miniPlayer.classList.remove("show");
-        document.getElementById("current-song").textContent = "";
-        document.getElementById("current-artist").textContent = "";
-        document.getElementById("mini-album-cover").src = "";
-        document.getElementById("play-pause-btn").textContent = "Play";
-        document.getElementById("progress-bar").value = 0;
-        document.getElementById("status").textContent = "";
-        document.getElementById("duration").textContent = "00:00 / 00:00";
-      }
-    };
-
-    window.seek = function() {
-      const progressBar = document.getElementById("progress-bar");
-      if (currentAudio && !isNaN(currentAudio.duration)) {
-        currentAudio.currentTime = (progressBar.value / 100) * currentAudio.duration;
-      }
-    };
-
-    window.adjustVolume = function() {
-      const volumeSlider = document.getElementById("volume-slider");
-      if (currentAudio) {
-        currentAudio.volume = volumeSlider.value / 100;
-      }
-    };
-
-    function formatTime(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
-
-    function updateProgress() {
-      const progressBar = document.getElementById("progress-bar");
-      const durationDisplay = document.getElementById("duration");
-      if (currentAudio && !isNaN(currentAudio.duration)) {
-        progressBar.value = (currentAudio.currentTime / currentAudio.duration) * 100;
-        const current = formatTime(currentAudio.currentTime);
-        const total = formatTime(currentAudio.duration);
-        durationDisplay.textContent = `${current} / ${total}`;
-      }
-    }
-
-    // Comments
-    window.submitComment = async function() {
-      const commentText = document.querySelector(".comment-form textarea").value.trim();
-      const username = document.querySelector(".comment-form input[type='text']").value.trim() || "Anonymous";
-      if (!commentText) {
-        alert("Please enter a comment.");
-        return;
-      }
-      const timestamp = new Date().toLocaleString("en-US", { timeZone: "America/Chicago" });
-      try {
-        await addDoc(collection(db, "comments"), { text: commentText, timestamp, username });
-        document.querySelector(".comment-form textarea").value = "";
-        document.querySelector(".comment-form input[type='text']").value = "";
-        document.getElementById("status").textContent = "Comment submitted successfully";
-        setTimeout(() => document.getElementById("status").textContent = "", 3000);
-      } catch (error) {
-        console.error("Error submitting comment:", error);
-        alert("Error submitting comment: " + error.message);
-      }
-    };
-
-    function displayComments() {
-      const commentList = document.getElementById("comment-list");
-      const commentsQuery = query(collection(db, "comments"), orderBy("timestamp", "desc"));
-      onSnapshot(commentsQuery, (snapshot) => {
-        commentList.innerHTML = "";
-        if (snapshot.empty) {
-          commentList.innerHTML = "<p>No comments yet.</p>";
-          return;
-        }
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          const div = document.createElement("div");
-          div.className = "comment";
-          div.innerHTML = `<span class="username">${data.username}</span><p>${data.text}</p><span class="timestamp">${data.timestamp}</span>`;
-          commentList.appendChild(div);
-        });
-      }, (error) => {
-        console.error("Error fetching comments:", error);
-        commentList.innerHTML = "<p>Error loading comments: " + error.message + "</p>";
-      });
-    }
-
-    // Edit Request Modal
-    window.showEditRequestModal = function(albumTitle = null) {
-      console.log("Opening modal for album:", albumTitle || "New Album");
-      const overlay = document.createElement("div");
-      overlay.className = "overlay";
-      document.body.appendChild(overlay);
-
-      const isEdit = albumTitle && typeof albumTitle === "string" && albumTitle.trim() !== "";
-      console.log("Is edit mode:", isEdit);
-
-      const modal = document.createElement("div");
-      modal.className = "edit-request-modal";
-      modal.innerHTML = `
-        <h3>${isEdit ? `Request Edit for "${albumTitle}"` : "Request New Album"}</h3>
-        <select id="editField" onchange="toggleEditFields()" required>
-          <option value="" disabled selected>Select action</option>
-          ${isEdit ? `
-            <option value="title">Title</option>
-            <option value="year">Year</option>
-            <option value="label">Label</option>
-            <option value="format">Format</option>
-            <option value="artists">Artists</option>
-            <option value="tracks">Tracks</option>
-            <option value="download">Download Link</option>
-          ` : ""}
-          <option value="new_album">Add New Album</option>
-        </select>
-        <div id="editFields" class="${isEdit ? "" : "hidden"}">
-          <input type="text" id="currentValue" placeholder="Current value (optional)" maxlength="100">
-          <textarea id="proposedChange" placeholder="Proposed change" required></textarea>
-        </div>
-        <div id="newAlbumFields" class="${isEdit ? "hidden" : ""}">
-          <input type="text" id="newTitle" placeholder="Album title" maxlength="100">
-          <input type="text" id="newYear" placeholder="Year (e.g., 2023)" maxlength="4">
-          <input type="text" id="newLabel" placeholder="Label" maxlength="100">
-          <input type="text" id="newFormat" placeholder="Format (e.g., Cassette)" maxlength="100">
-          <input type="text" id="newArtists" placeholder="Artists (e.g., Hexenmeister)" maxlength="100">
-          <textarea id="newTracks" placeholder="Tracks (one per line)"></textarea>
-          <input type="text" id="newDownload" placeholder="Download link (optional)" maxlength="200">
-        </div>
-        <input type="text" id="editUsername" placeholder="Your username (optional)" maxlength="20">
-        <button onclick="submitEditRequest('${albumTitle || ""}')">Submit</button>
-        <button onclick="closeModal()">Cancel</button>
-      `;
-      document.body.appendChild(modal);
-      document.getElementById("editField").focus();
-    };
-
-    window.toggleEditFields = function() {
-      const field = document.getElementById("editField").value;
-      const editFields = document.getElementById("editFields");
-      const newAlbumFields = document.getElementById("newAlbumFields");
-      if (field === "new_album") {
-        editFields.classList.add("hidden");
-        newAlbumFields.classList.remove("hidden");
-        document.getElementById("newTitle").focus();
-      } else {
-        editFields.classList.remove("hidden");
-        newAlbumFields.classList.add("hidden");
-        document.getElementById("currentValue").focus();
-      }
-    };
-
-    window.submitEditRequest = async function(albumTitle) {
-      const field = document.getElementById("editField").value;
-      const username = document.getElementById("editUsername").value.trim() || "Anonymous";
-      if (!field) {
-        alert("Please select an action.");
-        return;
-      }
-      const timestamp = new Date().toLocaleString("en-US", { timeZone: "America/Chicago" });
-      let requestData = {
-        type: "edit_request",
-        albumTitle: albumTitle || "New Album Request",
-        field: field,
-        username: username,
-        timestamp: timestamp,
-        status: "pending"
-      };
-      try {
-        if (field === "new_album") {
-          const newTitle = document.getElementById("newTitle").value.trim();
-          const newYear = document.getElementById("newYear").value.trim();
-          const newLabel = document.getElementById("newLabel").value.trim();
-          const newFormat = document.getElementById("newFormat").value.trim();
-          const newArtists = document.getElementById("newArtists").value.trim();
-          const newTracks = document.getElementById("newTracks").value.trim();
-          const newDownload = document.getElementById("newDownload").value.trim();
-          if (!newTitle || !newYear || !newLabel || !newFormat) {
-            alert("Please provide title, year, label, and format for the new album.");
-            return;
-          }
-          requestData.proposedChange = {
-            title: newTitle,
-            year: newYear,
-            label: newLabel,
-            format: newFormat,
-            artists: newArtists,
-            tracks: newTracks,
-            download: newDownload
-          };
-        } else {
-          const currentValue = document.getElementById("currentValue").value.trim();
-          const proposedChange = document.getElementById("proposedChange").value.trim();
-          if (!proposedChange) {
-            alert("Please provide a proposed change.");
-            return;
-          }
-          requestData.currentValue = currentValue;
-          requestData.proposedChange = proposedChange;
-        }
-        await addDoc(collection(db, "requests"), requestData);
-        alert("Request submitted successfully! It will be reviewed by an administrator.");
-        closeModal();
-      } catch (error) {
-        console.error("Error submitting edit request:", error);
-        alert("Error submitting request: " + error.message);
-      }
-    };
-
-    window.closeModal = function() {
-      const overlay = document.querySelector(".overlay");
-      const modal = document.querySelector(".edit-request-modal") || document.querySelector(".news-request-modal");
-      if (overlay) overlay.remove();
-      if (modal) modal.remove();
-    };
-
-    // News Section
-    function displayNews() {
-      const newsList = document.getElementById("news-list");
-      const newsQuery = query(collection(db, "news"), orderBy("timestamp", "desc"));
-      onSnapshot(newsQuery, (snapshot) => {
-        newsList.innerHTML = "";
-        if (snapshot.empty) {
-          newsList.innerHTML = "<p>No news yet.</p>";
-          return;
-        }
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          const div = document.createElement("div");
-          div.className = "news-item";
-          div.innerHTML = `
-            <span class="title">${data.title}</span>
-            <span class="date">${data.timestamp}</span>
-            <p>${data.text}</p>
-          `;
-          newsList.appendChild(div);
-        });
-      }, (error) => {
-        console.error("Error fetching news:", error);
-        newsList.innerHTML = "<p>Error loading news: " + error.message + "</p>";
-      });
-    }
-
-    window.showAddNewsModal = function() {
-      const overlay = document.createElement("div");
-      overlay.className = "overlay";
-      document.body.appendChild(overlay);
-
-      const modal = document.createElement("div");
-      modal.className = "news-request-modal";
-      modal.innerHTML = `
-        <h3>Request New Update</h3>
-        <input type="text" id="newsTitle" placeholder="News title" maxlength="100" required>
-        <textarea id="newsText" placeholder="News content" required></textarea>
-        <input type="text" id="newsUsername" placeholder="Your username (optional)" maxlength="20">
-        <button onclick="submitNewsRequest()">Submit</button>
-        <button onclick="closeModal()">Cancel</button>
-      `;
-      document.body.appendChild(modal);
-      document.getElementById("newsTitle").focus();
-    };
-
-    window.submitNewsRequest = async function() {
-      const title = document.getElementById("newsTitle").value.trim();
-      const text = document.getElementById("newsText").value.trim();
-      const username = document.getElementById("newsUsername").value.trim() || "Anonymous";
-      if (!title || !text) {
-        alert("Please provide a title and content for the news update.");
-        return;
-      }
-      const timestamp = new Date().toLocaleString("en-US", { timeZone: "America/Chicago" });
-      const requestData = {
-        type: "news_request",
-        title: title,
-        text: text,
-        username: username,
-        timestamp: timestamp,
-        status: "pending"
-      };
-      try {
-        await addDoc(collection(db, "requests"), requestData);
-        alert("News request submitted successfully! It will be reviewed by an administrator.");
-        closeModal();
-      } catch (error) {
-        console.error("Error submitting news request:", error);
-        alert("Error submitting request: " + error.message);
-      }
-    };
-
-    // Language Popup
-    window.showLanguagePopup = function() {
-      const overlay = document.createElement("div");
-      overlay.className = "overlay";
-      document.body.appendChild(overlay);
-      const popup = document.createElement("div");
-      popup.className = "language-popup";
-      popup.innerHTML = `
-        <h3>Select Language</h3>
-        <select id="langSelect">
-          <option value="index.html">English</option>
-          <option value="indexru.html">Русский (Russian)</option>
-          <option value="indexgerman.html">Deutsch (German)</option>
-          <option value="indexuk.html">Українська (Ukrainian)</option>
-        </select>
-        <button onclick="setLanguage()">Confirm</button>
-      `;
-      document.body.appendChild(popup);
-      const savedLanguage = localStorage.getItem("selectedLanguage") || "index.html";
-      document.getElementById("langSelect").value = savedLanguage;
-      document.getElementById("langSelect").focus();
-    };
-
-    window.setLanguage = function() {
-      const langSelect = document.getElementById("langSelect");
-      const lang = langSelect.value;
-      if (!lang) {
-        alert("Please select a language.");
-        return;
-      }
-      localStorage.setItem("selectedLanguage", lang);
-      const overlay = document.querySelector(".overlay");
-      const popup = document.querySelector(".language-popup");
-      if (overlay) overlay.remove();
-      if (popup) popup.remove();
-      if (window.location.pathname.split("/").pop() !== lang) {
-        window.location.href = lang;
-      }
-    };
-
-    window.debugSettingsClick = function() {
-      window.showLanguagePopup();
-    };
-
-    // Admin Inbox
-    let isAdminAuthenticated = false;
-    const ADMIN_PASSWORD = "trvekvltbabypowder";
-
-    window.toggleAdminInbox = function() {
-      if (!isAdminAuthenticated) {
-        console.log("Prompting for admin password");
-        const overlay = document.createElement("div");
-        overlay.className = "overlay";
-        document.body.appendChild(overlay);
-
-        const prompt = document.createElement("div");
-        prompt.className = "password-prompt";
-        prompt.innerHTML = `
-          <h3>Enter Admin Password</h3>
-          <input type="password" id="adminPassword" placeholder="Password">
-          <button onclick="verifyAdminPassword()">Submit</button>
-          <button onclick="closePasswordPrompt()">Cancel</button>
-        `;
-        document.body.appendChild(prompt);
-        document.getElementById("adminPassword").focus();
-      } else {
-        toggleInboxVisibility();
-      }
-    };
-
-    window.verifyAdminPassword = function() {
-      const password = document.getElementById("adminPassword").value;
-      if (password === ADMIN_PASSWORD) {
-        isAdminAuthenticated = true;
-        console.log("Admin authenticated successfully");
-        closePasswordPrompt();
-        toggleInboxVisibility();
-      } else {
-        console.log("Admin authentication failed");
-        alert("Incorrect password!");
-      }
-    };
-
-    window.closePasswordPrompt = function() {
-      const overlay = document.querySelector(".overlay");
-      const prompt = document.querySelector(".password-prompt");
-      if (overlay) overlay.remove();
-      if (prompt) prompt.remove();
-    };
-
-    function toggleInboxVisibility() {
-      const inbox = document.getElementById("admin-inbox");
-      const button = document.querySelector(".toggle-inbox-btn");
-      if (inbox.classList.contains("hidden")) {
-        inbox.classList.remove("hidden");
-        button.textContent = "Hide Admin Inbox";
-        console.log("Displaying admin inbox");
-        displayRequests();
-      } else {
-        inbox.classList.add("hidden");
-        button.textContent = "Show Admin Inbox";
-        console.log("Hiding admin inbox");
-      }
-    }
-
-    function displayRequests() {
-      const requestList = document.getElementById("request-list");
-      requestList.innerHTML = "<p>Loading requests...</p>";
-      const timeout = setTimeout(() => {
-        if (requestList.innerHTML === "<p>Loading requests...</p>") {
-          requestList.innerHTML = "<p>Error: Request loading timed out. Please try again.</p>";
-        }
-      }, 10000); // 10 seconds
-      const requestsQuery = query(collection(db, "requests"), orderBy("timestamp", "desc"));
-      onSnapshot(requestsQuery, (snapshot) => {
-        clearTimeout(timeout);
-        requestList.innerHTML = "";
-        if (snapshot.empty) {
-          requestList.innerHTML = "<p>No pending requests.</p>";
-          return;
-        }
-        let hasPending = false;
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          if (data.status === "completed") return;
-          hasPending = true;
-          const div = document.createElement("div");
-          div.className = "request-item";
-          if (data.type === "edit_request") {
-            div.innerHTML = `
-              <h3>${data.albumTitle}</h3>
-              <ul>
-                <li><span class="label">Type:</span> Edit Request</li>
-                <li><span class="label">Field:</span> ${data.field}</li>
-                <li><span class="label">Current Value:</span> ${data.currentValue || "N/A"}</li>
-                <li><span class="label">Proposed Change:</span> 
-                  ${typeof data.proposedChange === "object" ? 
-                    `<ul class="nested-list">` +
-                    Object.entries(data.proposedChange).map(([key, value]) => 
-                      `<li><span class="label">${key}:</span> ${value || "N/A"}</li>`
-                    ).join("") +
-                    `</ul>` : data.proposedChange}
-                </li>
-                <li><span class="label">Username:</span> ${data.username}</li>
-                <li><span class="label">Timestamp:</span> ${data.timestamp}</li>
-                <li><span class="label">Status:</span> <span class="status">${data.status}</span></li>
-              </ul>
-              <button class="complete-btn" onclick="completeRequest('${doc.id}')">Complete</button>
-            `;
-          } else if (data.type === "news_request") {
-            div.innerHTML = `
-              <h3>News Update Request</h3>
-              <ul>
-                <li><span class="label">Type:</span> News Request</li>
-                <li><span class="label">Title:</span> ${data.title}</li>
-                <li><span class="label">Content:</span> ${data.text}</li>
-                <li><span class="label">Username:</span> ${data.username}</li>
-                <li><span class="label">Timestamp:</span> ${data.timestamp}</li>
-                <li><span class="label">Status:</span> <span class="status">${data.status}</span></li>
-              </ul>
-              <button class="complete-btn" onclick="completeNewsRequest('${doc.id}')">Complete</button>
-            `;
-          }
-          requestList.appendChild(div);
-        });
-        if (!hasPending) {
-          requestList.innerHTML = "<p>No pending requests.</p>";
-        }
-      }, (error) => {
-        clearTimeout(timeout);
-        console.error("Error fetching requests:", error);
-        requestList.innerHTML = "<p>Error loading requests: " + error.message + "</p>";
-      });
-    }
-
-    window.completeRequest = async function(docId) {
-      if (!docId) {
-        console.error("Invalid document ID");
-        alert("Error: Invalid request ID");
-        return;
-      }
-      try {
-        const requestRef = doc(db, "requests", docId);
-        await updateDoc(requestRef, { status: "completed" });
-        console.log(`Request ${docId} marked as completed`);
-        document.getElementById("status").textContent = "Request completed successfully";
-        setTimeout(() => document.getElementById("status").textContent = "", 3000);
-        displayRequests();
-      } catch (error) {
-        console.error("Error completing request:", error);
-        alert("Error completing request: " + error.message);
-      }
-    };
-
-    window.completeNewsRequest = async function(docId) {
-      if (!docId) {
-        console.error("Invalid document ID");
-        alert("Error: Invalid request ID");
-        return;
-      }
-      try {
-        const requestRef = doc(db, "requests", docId);
-        const requestSnap = await getDoc(requestRef);
-        const requestData = requestSnap.data();
-        await addDoc(collection(db, "news"), {
-          title: requestData.title,
-          text: requestData.text,
-          timestamp: requestData.timestamp,
-          username: requestData.username
-        });
-        await updateDoc(requestRef, { status: "completed" });
-        console.log(`News request ${docId} marked as completed and published`);
-        document.getElementById("status").textContent = "News request completed and published successfully";
-        setTimeout(() => document.getElementById("status").textContent = "", 3000);
-        displayRequests();
-      } catch (error) {
-        console.error("Error completing news request:", error);
-        alert("Error completing news request: " + error.message);
-      }
-    };
-
-    // Navigation and Initialization
-    document.addEventListener("DOMContentLoaded", () => {
-      const savedLanguage = localStorage.getItem("selectedLanguage");
-      const currentPage = window.location.pathname.split("/").pop() || "index.html";
-      if (!savedLanguage) {
-        window.showLanguagePopup();
-      } else if (savedLanguage !== currentPage) {
-        window.location.href = savedLanguage;
-      }
-      displayComments();
-      displayNews();
-      const hash = window.location.hash;
-      if (hash === "#admin-inbox") {
-        toggleAdminInbox();
-      }
-      window.addEventListener("hashchange", () => {
-        const newHash = window.location.hash;
-        if (newHash === "#admin-inbox") {
-          toggleAdminInbox();
-        } else {
-          const inbox = document.getElementById("admin-inbox");
-          const button = document.querySelector(".toggle-inbox-btn");
-          inbox.classList.add("hidden");
-          button.textContent = "Show Admin Inbox";
-        }
-      });
-    });
-  </script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

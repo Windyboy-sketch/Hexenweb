@@ -261,7 +261,7 @@
         </div>
         <div class="product-details">
           <div class="product-title">Pilzritual Der Hexen Limited Edition Long-Sleeve Shirt</div>
-          <div class="product-price">$45.00 USD</div>
+          <div class="product-price">$45.00 USD (Optional T-Shirt: $28.00 USD)</div>
           <div class="limited-run">Limited Run: Only 10 Available</div>
           <div class="color-selector">
             <label for="color-select">Color:</label>
@@ -275,6 +275,50 @@
           <div class="features">
             <h3>Product Features</h3>
             <ul>
+              <li>Gildan 2400 Long-Sleeve</li>
+              <li>Environmentally-friendly cotton for a vintage feel</li>
+              <li>Seamless design reduces fabric waste</li>
+              <li>Elastic ribbed collar retains shape</li>
+              <li>Stabilizing shoulder tape prevents stretching</li>
+              <li>Classic fit with medium fabric weight (6.0 oz/yd²)</li>
+            </ul>
+          </div>
+          <div class="care-instructions">
+            <h3>Care Instructions</h3>
+            <ul>
+              <li>Non-chlorine: bleach as needed</li>
+              <li>Do not dryclean</li>
+              <li>Machine wash: cold (max 30°C or 90°F)</li>
+              <li>Tumble dry: medium heat</li>
+              <li>Do not iron</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-section">
+      <h2>ADDIKTED TO SHROOMS!! Limited Edition Long-Sleeve Shirt</h2>
+      <div class="product-container">
+        <div class="product-images">
+          <img id="mush-product-image-front" src="images/mushpinkfront.jpg" alt="ADDIKTED TO SHROOMS!! Long-Sleeve Front (Pink)" class="product-image">
+          <img id="mush-product-image-back" src="images/mushpinkback.jpg" alt="ADDIKTED TO SHROOMS!! Long-Sleeve Back (Pink)" class="product-image">
+        </div>
+        <div class="product-details">
+          <div class="product-title">ADDIKTED TO SHROOMS!! Limited Edition Long-Sleeve Shirt</div>
+          <div class="product-price">$45.00 USD (Optional T-Shirt: $28.00 USD)</div>
+          <div class="limited-run">Limited Run: Only 10 Available</div>
+          <div class="color-selector">
+            <label for="mush-color-select">Color:</label>
+            <select id="mush-color-select" onchange="changeMushProductImages()">
+              <option value="pink" selected>Pink</option>
+              <option value="white">White</option>
+            </select>
+          </div>
+          <button class="buy-btn" onclick="showPurchasePopup()">Buy Now</button>
+          <div class="features">
+            <h3>Product Features</h3>
+            <ul>
+              <li>Gildan 2400 Long-Sleeve</li>
               <li>Environmentally-friendly cotton for a vintage feel</li>
               <li>Seamless design reduces fabric waste</li>
               <li>Elastic ribbed collar retains shape</li>
@@ -317,6 +361,17 @@
       backImage.alt = `Pilzritual Der Hexen Long-Sleeve Back (${color.charAt(0).toUpperCase() + color.slice(1)})`;
     }
 
+    function changeMushProductImages() {
+      const colorSelect = document.getElementById('mush-color-select');
+      const frontImage = document.getElementById('mush-product-image-front');
+      const backImage = document.getElementById('mush-product-image-back');
+      const color = colorSelect.value;
+      frontImage.src = `images/mush${color}front.jpg`;
+      backImage.src = `images/mush${color}back.jpg`;
+      frontImage.alt = `ADDIKTED TO SHROOMS!! Long-Sleeve Front (${color.charAt(0).toUpperCase() + color.slice(1)})`;
+      backImage.alt = `ADDIKTED TO SHROOMS!! Long-Sleeve Back (${color.charAt(0).toUpperCase() + color.slice(1)})`;
+    }
+
     function showPurchasePopup() {
       document.getElementById('overlay').classList.add('show');
       document.getElementById('purchase-popup').classList.add('show');
@@ -331,10 +386,12 @@
       window.location.href = 'index.html#language';
     };
 
-    // Initialize black color images on page load
+    // Initialize images on page load
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('color-select').value = 'black';
       changeProductImages();
+      document.getElementById('mush-color-select').value = 'pink';
+      changeMushProductImages();
     });
   </script>
 </body>
